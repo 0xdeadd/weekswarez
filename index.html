@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Weeks Web</title>
+  <title>Weeks Web — Software for Play Centers & Salons</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
   <script>
@@ -27,10 +27,9 @@
     body { font-family: 'Inter', sans-serif; }
     .card-hover { transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); }
     .card-hover:hover { transform: translateY(-2px); box-shadow: 0 8px 30px rgba(0,0,0,0.06); }
-    .dark .card-hover:hover { box-shadow: 0 0 30px rgba(34, 197, 94, 0.08); }
     .blink { animation: blink 1s step-end infinite; }
     @keyframes blink { 50% { opacity: 0; } }
-    ::selection { background: #16a34a; color: #fff; }
+    ::selection { background: #7c3aed; color: #fff; }
   </style>
 </head>
 <body class="bg-neutral-50 dark:bg-[#0a0a0a] text-gray-900 dark:text-gray-300 antialiased transition-colors duration-200"
@@ -38,18 +37,22 @@
 
   <!-- Nav -->
   <nav class="fixed top-0 w-full bg-white/90 dark:bg-[#0a0a0a]/90 backdrop-blur-md border-b border-neutral-200 dark:border-neutral-800 z-50">
-    <div class="max-w-6xl mx-auto px-6 h-14 flex items-center justify-between">
-      <a href="index.html" class="flex items-center gap-2 font-mono">
-        <span class="text-green-600 dark:text-green-500 font-bold">~/</span>
-        <span class="text-gray-900 dark:text-white font-bold">weeks-web</span>
+    <div class="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
+      <a href="index.html" class="flex items-center gap-3">
+        <div class="w-9 h-9 bg-purple-600 rounded-xl flex items-center justify-center">
+          <span class="text-white font-black text-lg">W</span>
+        </div>
+        <div>
+          <span class="font-bold text-gray-900 dark:text-white text-lg">Weeks Web</span>
+          <span class="hidden sm:inline text-neutral-400 dark:text-neutral-600 text-sm ml-2">Play Centers & Salons</span>
+        </div>
       </a>
-      <div class="hidden md:flex items-center gap-6 font-mono text-sm">
-        <a href="#proof" class="text-neutral-500 hover:text-green-600 dark:hover:text-green-500 transition">[proof]</a>
-        <a href="#stack" class="text-neutral-500 hover:text-green-600 dark:hover:text-green-500 transition">[stack]</a>
-
-        <a href="#pricing" class="text-neutral-500 hover:text-green-600 dark:hover:text-green-500 transition">[pricing]</a>
-        <a href="dashboard.html" class="text-green-600 dark:text-green-500 font-semibold hover:text-green-700 dark:hover:text-green-400 transition">[dashboard &gt;]</a>
-        <!-- Theme toggle -->
+      <div class="hidden md:flex items-center gap-6 text-sm">
+        <a href="#features" class="text-neutral-500 hover:text-gray-900 dark:hover:text-white transition">Features</a>
+        <a href="#proof" class="text-neutral-500 hover:text-gray-900 dark:hover:text-white transition">Live Proof</a>
+        <a href="#problems" class="text-neutral-500 hover:text-gray-900 dark:hover:text-white transition">Why Switch</a>
+        <a href="#pricing" class="text-neutral-500 hover:text-gray-900 dark:hover:text-white transition">Pricing</a>
+        <a href="dashboard.html" class="bg-purple-600 text-white font-semibold px-4 py-2 rounded-lg hover:bg-purple-700 transition">See Dashboard</a>
         <button @click="dark = !dark; document.documentElement.classList.toggle('dark'); localStorage.setItem('theme', dark ? 'dark' : 'light')"
                 class="p-1.5 rounded-md border border-neutral-200 dark:border-neutral-700 hover:bg-neutral-100 dark:hover:bg-neutral-800 transition" title="Toggle theme">
           <svg x-show="!dark" class="w-4 h-4 text-neutral-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"/></svg>
@@ -60,243 +63,517 @@
   </nav>
 
   <!-- Hero -->
-  <section class="pt-28 pb-20 px-6">
+  <section class="pt-32 pb-20 px-6">
     <div class="max-w-6xl mx-auto">
-      <div class="font-mono text-sm text-green-600/70 dark:text-green-500/60 mb-6">$ cat manifesto.txt</div>
-      <h1 class="text-4xl md:text-6xl lg:text-7xl font-black text-gray-900 dark:text-white leading-[1.05] tracking-tight">
-        We build software for<br>
-        <span class="text-green-600 dark:text-green-500">Newnan businesses.</span>
-      </h1>
-      <p class="mt-8 text-lg md:text-xl text-neutral-500 dark:text-gray-400 max-w-2xl leading-relaxed">
-        Custom business software for local companies in Newnan and Coweta County. Bookings, payments, waivers, memberships, POS, gift cards, admin dashboards. Already running at <a href="https://zanysplayworld.com" target="_blank" class="text-green-600 dark:text-green-500 hover:underline font-semibold">Zany's Play World</a> right here in Newnan.
-      </p>
-      <div class="mt-10 flex flex-col sm:flex-row gap-4">
-        <a href="#proof" class="bg-gray-900 dark:bg-green-600 text-white font-bold px-8 py-3.5 rounded-lg hover:bg-gray-800 dark:hover:bg-green-500 transition text-center font-mono text-sm">
-          SEE THE PROOF
-        </a>
-        <a href="https://zanysplayworld.com" target="_blank" class="border border-neutral-200 dark:border-neutral-700 text-gray-700 dark:text-gray-300 font-medium px-8 py-3.5 rounded-lg hover:border-neutral-400 dark:hover:border-green-500/50 hover:text-gray-900 dark:hover:text-white transition text-center font-mono text-sm">
-          VISIT LIVE SITE &rarr;
-        </a>
+      <div class="max-w-3xl">
+        <div class="inline-flex items-center gap-2 bg-purple-50 dark:bg-purple-500/10 text-purple-700 dark:text-purple-400 text-xs font-semibold px-3 py-1.5 rounded-full mb-6 border border-purple-200 dark:border-purple-500/20">
+          <span class="w-1.5 h-1.5 bg-green-500 rounded-full animate-pulse"></span>
+          Live at zanysplayworld.com + book.zanycuts.com
+        </div>
+        <h1 class="text-4xl md:text-6xl lg:text-7xl font-black text-gray-900 dark:text-white leading-[1.05] tracking-tight">
+          Software that runs<br>
+          <span class="text-purple-600 dark:text-purple-400">your whole business.</span>
+        </h1>
+        <p class="mt-8 text-lg md:text-xl text-neutral-500 dark:text-gray-400 max-w-2xl leading-relaxed">
+          Built for play centers and salons. Bookings, payments, waivers, memberships, gift cards, POS &mdash; one system instead of five. Already running at <a href="https://zanysplayworld.com" target="_blank" class="text-purple-600 dark:text-purple-400 hover:underline font-semibold">Zany's Play World</a> and <a href="https://book.zanycuts.com" target="_blank" class="text-purple-600 dark:text-purple-400 hover:underline font-semibold">Zany Cuts</a>.
+        </p>
+        <div class="mt-10 flex flex-col sm:flex-row gap-4">
+          <a href="dashboard.html" class="bg-purple-600 text-white font-bold px-8 py-3.5 rounded-xl hover:bg-purple-700 transition text-center shadow-lg shadow-purple-200 dark:shadow-none">
+            See the Dashboard
+          </a>
+          <a href="https://zanysplayworld.com" target="_blank" class="border border-neutral-200 dark:border-neutral-700 text-gray-700 dark:text-gray-300 font-semibold px-8 py-3.5 rounded-xl hover:border-neutral-400 dark:hover:border-neutral-500 transition text-center">
+            See It Live at Zany's
+          </a>
+        </div>
       </div>
 
-      <!-- Terminal block (always dark) -->
-      <div class="mt-20 bg-gray-950 rounded-xl overflow-hidden shadow-lg">
-        <div class="flex items-center gap-2 px-4 py-3 border-b border-gray-800">
-          <div class="w-3 h-3 rounded-full bg-red-500/80"></div>
-          <div class="w-3 h-3 rounded-full bg-yellow-500/80"></div>
-          <div class="w-3 h-3 rounded-full bg-green-500/80"></div>
-          <span class="ml-3 text-xs text-gray-500 font-mono">weeks-web &mdash; system status</span>
+      <!-- Quick stats -->
+      <div class="mt-20 grid grid-cols-2 md:grid-cols-4 gap-4">
+        <div class="bg-white dark:bg-[#1a1a1a] rounded-xl p-5 border border-neutral-200 dark:border-neutral-800">
+          <div class="text-2xl font-black text-gray-900 dark:text-white">20+</div>
+          <div class="text-sm text-neutral-500 mt-1">Integrated features</div>
         </div>
-        <div class="p-6 font-mono text-sm space-y-2">
-          <div><span class="text-green-400">STATUS</span> <span class="text-gray-600">.....</span> <span class="text-green-400 font-bold">LIVE IN PRODUCTION</span></div>
-          <div><span class="text-green-400">CLIENT</span> <span class="text-gray-600">.....</span> <span class="text-white">Zany's Play World &mdash; Newnan, GA</span></div>
-          <div><span class="text-green-400">DOMAIN</span> <span class="text-gray-600">.....</span> <a href="https://zanysplayworld.com" target="_blank" class="text-purple-400 hover:underline">zanysplayworld.com</a></div>
-          <div><span class="text-green-400">STACK</span> <span class="text-gray-600">.....</span> <span class="text-white">Next.js / React / TypeScript / Stripe / Prisma / Supabase</span></div>
-          <div><span class="text-green-400">MODULES</span> <span class="text-gray-600">..</span> <span class="text-white">20+ integrated features</span></div>
-          <div><span class="text-green-400">PAYMENTS</span> <span class="text-gray-600">.</span> <span class="text-white">Stripe (online) + Stripe Terminal (POS) + Cash</span></div>
-          <div><span class="text-green-400">CLIENT2</span> <span class="text-gray-600">.</span> <span class="text-yellow-400">Zany Cuts &mdash; book.zanycuts.com (building)</span></div>
-          <div class="pt-2 text-green-400/50">$ <span class="blink">_</span></div>
+        <div class="bg-white dark:bg-[#1a1a1a] rounded-xl p-5 border border-neutral-200 dark:border-neutral-800">
+          <div class="text-2xl font-black text-gray-900 dark:text-white">3</div>
+          <div class="text-sm text-neutral-500 mt-1">Payment methods (card, terminal, cash)</div>
+        </div>
+        <div class="bg-white dark:bg-[#1a1a1a] rounded-xl p-5 border border-neutral-200 dark:border-neutral-800">
+          <div class="text-2xl font-black text-green-600 dark:text-green-500">Live</div>
+          <div class="text-sm text-neutral-500 mt-1">In production today</div>
+        </div>
+        <div class="bg-white dark:bg-[#1a1a1a] rounded-xl p-5 border border-neutral-200 dark:border-neutral-800">
+          <div class="text-2xl font-black text-gray-900 dark:text-white">0</div>
+          <div class="text-sm text-neutral-500 mt-1">Paper waivers needed</div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- Proof: Zany's -->
-  <section id="proof" class="py-24 px-6 bg-white dark:bg-[#111] border-y border-neutral-200 dark:border-neutral-800">
+  <!-- Features -->
+  <section id="features" class="py-24 px-6 bg-white dark:bg-[#111] border-y border-neutral-200 dark:border-neutral-800">
     <div class="max-w-6xl mx-auto">
-      <div class="font-mono text-sm text-green-600/70 dark:text-green-500/60 mb-4">$ ls ./zanys-playworld/features/</div>
-      <h2 class="text-3xl md:text-4xl font-black text-gray-900 dark:text-white mb-4">
-        This is what we actually built.
-      </h2>
-      <p class="text-neutral-500 dark:text-gray-500 text-lg mb-12 max-w-2xl">
-        Not a pitch deck. A production app running a real business. Every feature below is live at <a href="https://zanysplayworld.com" target="_blank" class="text-green-600 dark:text-green-500 hover:underline font-semibold">zanysplayworld.com</a>.
-      </p>
+
+      <!-- Vertical tabs -->
+      <div class="flex gap-3 mb-12" x-data="{ tab: 'play' }">
+        <button @click="tab = 'play'" class="px-5 py-2.5 rounded-xl text-sm font-semibold transition" :class="tab === 'play' ? 'bg-purple-600 text-white shadow-lg shadow-purple-200 dark:shadow-none' : 'bg-white dark:bg-[#1a1a1a] text-neutral-500 border border-neutral-200 dark:border-neutral-800 hover:text-gray-900 dark:hover:text-white'">
+          Play Centers
+        </button>
+        <button @click="tab = 'salon'" class="px-5 py-2.5 rounded-xl text-sm font-semibold transition" :class="tab === 'salon' ? 'bg-purple-600 text-white shadow-lg shadow-purple-200 dark:shadow-none' : 'bg-white dark:bg-[#1a1a1a] text-neutral-500 border border-neutral-200 dark:border-neutral-800 hover:text-gray-900 dark:hover:text-white'">
+          Salons & Barbershops
+        </button>
+      </div>
+
+      <!-- Play center features -->
+      <div x-show="tab === 'play'">
+      <div class="max-w-2xl mb-16">
+        <div class="inline-flex items-center gap-2 bg-green-50 dark:bg-green-500/10 text-green-700 dark:text-green-400 text-xs font-semibold px-3 py-1.5 rounded-full mb-4 border border-green-200 dark:border-green-500/20">
+          <span class="w-1.5 h-1.5 bg-green-500 rounded-full animate-pulse"></span> Live at zanysplayworld.com
+        </div>
+        <h2 class="text-3xl md:text-4xl font-black text-gray-900 dark:text-white">Everything your play center needs. Already built.</h2>
+        <p class="mt-4 text-neutral-500 dark:text-gray-500 text-lg">Every feature below is live in production at Zany's Play World in Newnan, GA. This isn't a roadmap. It's done.</p>
+      </div>
 
       <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
         <div class="bg-white dark:bg-[#1a1a1a] rounded-xl p-6 border border-neutral-200 dark:border-neutral-800 card-hover">
-          <div class="font-mono text-xs text-green-600 dark:text-green-500 mb-3">/book/*</div>
+          <div class="w-10 h-10 bg-blue-100 dark:bg-blue-500/10 rounded-xl flex items-center justify-center mb-4">
+            <svg class="w-5 h-5 text-blue-600 dark:text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
+          </div>
           <h3 class="font-bold text-gray-900 dark:text-white text-lg mb-2">Online Booking</h3>
-          <p class="text-neutral-500 dark:text-gray-500 text-sm leading-relaxed">Package selection, age-based pricing, party reservations ($200 weekday / $250 weekend), open play walk-ins, real-time availability.</p>
+          <p class="text-neutral-500 dark:text-gray-500 text-sm leading-relaxed">Parents book open play and parties online 24/7. Age-based pricing, package selection, real-time availability. No phone tag.</p>
         </div>
 
         <div class="bg-white dark:bg-[#1a1a1a] rounded-xl p-6 border border-neutral-200 dark:border-neutral-800 card-hover">
-          <div class="font-mono text-xs text-green-600 dark:text-green-500 mb-3">/api/stripe/*</div>
-          <h3 class="font-bold text-gray-900 dark:text-white text-lg mb-2">Stripe + POS + Cash</h3>
-          <p class="text-neutral-500 dark:text-gray-500 text-sm leading-relaxed">Online Stripe checkout, in-person Stripe Terminal, cash drawer tracking and reconciliation. Three payment methods, one system.</p>
+          <div class="w-10 h-10 bg-pink-100 dark:bg-pink-500/10 rounded-xl flex items-center justify-center mb-4">
+            <svg class="w-5 h-5 text-pink-600 dark:text-pink-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M21 15.546c-.523 0-1.046.151-1.5.454a2.704 2.704 0 01-3 0 2.704 2.704 0 00-3 0 2.704 2.704 0 01-3 0 2.704 2.704 0 00-3 0 2.704 2.704 0 01-3 0A1.75 1.75 0 013 15.546M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+          </div>
+          <h3 class="font-bold text-gray-900 dark:text-white text-lg mb-2">Birthday Parties</h3>
+          <p class="text-neutral-500 dark:text-gray-500 text-sm leading-relaxed">Weekday and weekend party packages with deposits, add-on kids, private party upgrades, and automated pizza ordering for the party room.</p>
         </div>
 
         <div class="bg-white dark:bg-[#1a1a1a] rounded-xl p-6 border border-neutral-200 dark:border-neutral-800 card-hover">
-          <div class="font-mono text-xs text-green-600 dark:text-green-500 mb-3">/subscribe/*</div>
-          <h3 class="font-bold text-gray-900 dark:text-white text-lg mb-2">Memberships</h3>
-          <p class="text-neutral-500 dark:text-gray-500 text-sm leading-relaxed">$49/mo unlimited play. Stripe billing, member check-in, add-child flows, self-serve cancellation, subscription sync.</p>
-        </div>
-
-        <div class="bg-white dark:bg-[#1a1a1a] rounded-xl p-6 border border-neutral-200 dark:border-neutral-800 card-hover">
-          <div class="font-mono text-xs text-green-600 dark:text-green-500 mb-3">/book/waiver/*</div>
+          <div class="w-10 h-10 bg-amber-100 dark:bg-amber-500/10 rounded-xl flex items-center justify-center mb-4">
+            <svg class="w-5 h-5 text-amber-600 dark:text-amber-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
+          </div>
           <h3 class="font-bold text-gray-900 dark:text-white text-lg mb-2">Digital Waivers</h3>
-          <p class="text-neutral-500 dark:text-gray-500 text-sm leading-relaxed">Signature capture, phone verification, stored waivers for return visits, admin lookup by phone. No more paper.</p>
+          <p class="text-neutral-500 dark:text-gray-500 text-sm leading-relaxed">Parents sign on their phone. Signature capture, phone verification, stored for return visits. Look up any waiver by phone number. Kill the clipboard.</p>
         </div>
 
         <div class="bg-white dark:bg-[#1a1a1a] rounded-xl p-6 border border-neutral-200 dark:border-neutral-800 card-hover">
-          <div class="font-mono text-xs text-green-600 dark:text-green-500 mb-3">/gift-cards/*</div>
+          <div class="w-10 h-10 bg-green-100 dark:bg-green-500/10 rounded-xl flex items-center justify-center mb-4">
+            <svg class="w-5 h-5 text-green-600 dark:text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+          </div>
+          <h3 class="font-bold text-gray-900 dark:text-white text-lg mb-2">Payments + POS</h3>
+          <p class="text-neutral-500 dark:text-gray-500 text-sm leading-relaxed">Stripe for online. Stripe Terminal for in-person card payments. Cash drawer tracking. Three ways to pay, one place to reconcile.</p>
+        </div>
+
+        <div class="bg-white dark:bg-[#1a1a1a] rounded-xl p-6 border border-neutral-200 dark:border-neutral-800 card-hover">
+          <div class="w-10 h-10 bg-purple-100 dark:bg-purple-500/10 rounded-xl flex items-center justify-center mb-4">
+            <svg class="w-5 h-5 text-purple-600 dark:text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/></svg>
+          </div>
+          <h3 class="font-bold text-gray-900 dark:text-white text-lg mb-2">Memberships</h3>
+          <p class="text-neutral-500 dark:text-gray-500 text-sm leading-relaxed">Monthly unlimited play subscriptions. Stripe billing, member check-in at the front desk, add-child, self-serve cancellation. Recurring revenue on autopilot.</p>
+        </div>
+
+        <div class="bg-white dark:bg-[#1a1a1a] rounded-xl p-6 border border-neutral-200 dark:border-neutral-800 card-hover">
+          <div class="w-10 h-10 bg-rose-100 dark:bg-rose-500/10 rounded-xl flex items-center justify-center mb-4">
+            <svg class="w-5 h-5 text-rose-600 dark:text-rose-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 8v13m0-13V6a2 2 0 112 2h-2zm0 0V5.5A2.5 2.5 0 109.5 8H12zm-7 4h14M5 12a2 2 0 110-4h14a2 2 0 110 4M5 12v7a2 2 0 002 2h10a2 2 0 002-2v-7"/></svg>
+          </div>
           <h3 class="font-bold text-gray-900 dark:text-white text-lg mb-2">Gift Cards</h3>
-          <p class="text-neutral-500 dark:text-gray-500 text-sm leading-relaxed">Digital purchase, instant email delivery, balance check, terminal redemption, cash sale from admin. Full lifecycle.</p>
+          <p class="text-neutral-500 dark:text-gray-500 text-sm leading-relaxed">Digital gift cards bought online, delivered by email, redeemed at the register or on the terminal. Sell them from the admin panel too. Pure profit.</p>
         </div>
 
         <div class="bg-white dark:bg-[#1a1a1a] rounded-xl p-6 border border-neutral-200 dark:border-neutral-800 card-hover">
-          <div class="font-mono text-xs text-green-600 dark:text-green-500 mb-3">/event/*</div>
-          <h3 class="font-bold text-gray-900 dark:text-white text-lg mb-2">Event Registration</h3>
-          <p class="text-neutral-500 dark:text-gray-500 text-sm leading-relaxed">Summer camps, spring break, Easter, glow parties. Custom registration per event, payment, capacity tracking, check-in.</p>
+          <div class="w-10 h-10 bg-cyan-100 dark:bg-cyan-500/10 rounded-xl flex items-center justify-center mb-4">
+            <svg class="w-5 h-5 text-cyan-600 dark:text-cyan-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M14.828 14.828a4 4 0 01-5.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+          </div>
+          <h3 class="font-bold text-gray-900 dark:text-white text-lg mb-2">Events + Camps</h3>
+          <p class="text-neutral-500 dark:text-gray-500 text-sm leading-relaxed">Summer camps, spring break, Easter egg hunts, glow parties. Each event gets its own registration page, payment, and capacity tracking.</p>
         </div>
 
         <div class="bg-white dark:bg-[#1a1a1a] rounded-xl p-6 border border-neutral-200 dark:border-neutral-800 card-hover">
-          <div class="font-mono text-xs text-green-600 dark:text-green-500 mb-3">/admin/*</div>
+          <div class="w-10 h-10 bg-indigo-100 dark:bg-indigo-500/10 rounded-xl flex items-center justify-center mb-4">
+            <svg class="w-5 h-5 text-indigo-600 dark:text-indigo-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 17v-2m3 2v-4m3 4v-6m2 10H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
+          </div>
           <h3 class="font-bold text-gray-900 dark:text-white text-lg mb-2">Admin Dashboard</h3>
-          <p class="text-neutral-500 dark:text-gray-500 text-sm leading-relaxed">Front desk, bookings, schedule, customers, gift cards, subscriptions, revenue breakdown, settings, QR codes, waitlist.</p>
+          <p class="text-neutral-500 dark:text-gray-500 text-sm leading-relaxed">Front desk view, bookings, schedule, customer database, gift card management, subscriptions, revenue reports, coupons, QR codes, waitlist.</p>
         </div>
 
         <div class="bg-white dark:bg-[#1a1a1a] rounded-xl p-6 border border-neutral-200 dark:border-neutral-800 card-hover">
-          <div class="font-mono text-xs text-green-600 dark:text-green-500 mb-3">/api/email + /api/sms</div>
+          <div class="w-10 h-10 bg-orange-100 dark:bg-orange-500/10 rounded-xl flex items-center justify-center mb-4">
+            <svg class="w-5 h-5 text-orange-600 dark:text-orange-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+          </div>
           <h3 class="font-bold text-gray-900 dark:text-white text-lg mb-2">Email + SMS</h3>
-          <p class="text-neutral-500 dark:text-gray-500 text-sm leading-relaxed">Resend for transactional email. Twilio for SMS. Booking confirmations, reminders, receipts, unsubscribe management.</p>
+          <p class="text-neutral-500 dark:text-gray-500 text-sm leading-relaxed">Booking confirmations, party reminders, receipts. Automated via Resend and Twilio. Parents stay informed without you lifting a finger.</p>
+        </div>
+      </div>
+      </div><!-- end play tab -->
+
+      <!-- Salon features -->
+      <div x-show="tab === 'salon'">
+      <div class="max-w-2xl mb-16">
+        <div class="inline-flex items-center gap-2 bg-amber-50 dark:bg-amber-500/10 text-amber-700 dark:text-amber-400 text-xs font-semibold px-3 py-1.5 rounded-full mb-4 border border-amber-200 dark:border-amber-500/20">
+          <span class="w-1.5 h-1.5 bg-amber-500 rounded-full animate-pulse"></span> Building now at book.zanycuts.com
+        </div>
+        <h2 class="text-3xl md:text-4xl font-black text-gray-900 dark:text-white">Salon software that doesn't cost $300/mo per stylist.</h2>
+        <p class="mt-4 text-neutral-500 dark:text-gray-500 text-lg">Mangomint charges $175/mo for one provider. We give you the whole platform for a flat rate. Same features, better deal.</p>
+      </div>
+
+      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
+        <div class="bg-white dark:bg-[#1a1a1a] rounded-xl p-6 border border-neutral-200 dark:border-neutral-800 card-hover">
+          <div class="w-10 h-10 bg-blue-100 dark:bg-blue-500/10 rounded-xl flex items-center justify-center mb-4">
+            <svg class="w-5 h-5 text-blue-600 dark:text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
+          </div>
+          <h3 class="font-bold text-gray-900 dark:text-white text-lg mb-2">Online Booking</h3>
+          <p class="text-neutral-500 dark:text-gray-500 text-sm leading-relaxed">Clients book their stylist and service online. Real-time availability, automatic confirmations, no double-bookings.</p>
         </div>
 
         <div class="bg-white dark:bg-[#1a1a1a] rounded-xl p-6 border border-neutral-200 dark:border-neutral-800 card-hover">
-          <div class="font-mono text-xs text-green-600 dark:text-green-500 mb-3">/api/cron/*</div>
-          <h3 class="font-bold text-gray-900 dark:text-white text-lg mb-2">Coupons, QR, Cron, Pizza</h3>
-          <p class="text-neutral-500 dark:text-gray-500 text-sm leading-relaxed">Coupon validation, QR code generation, automated booking expiration, pizza ordering for parties. Whatever the business needs.</p>
+          <div class="w-10 h-10 bg-purple-100 dark:bg-purple-500/10 rounded-xl flex items-center justify-center mb-4">
+            <svg class="w-5 h-5 text-purple-600 dark:text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+          </div>
+          <h3 class="font-bold text-gray-900 dark:text-white text-lg mb-2">Stylist Schedules</h3>
+          <p class="text-neutral-500 dark:text-gray-500 text-sm leading-relaxed">Each stylist has their own availability, services, and pricing. Clients pick who they want and when.</p>
+        </div>
+
+        <div class="bg-white dark:bg-[#1a1a1a] rounded-xl p-6 border border-neutral-200 dark:border-neutral-800 card-hover">
+          <div class="w-10 h-10 bg-green-100 dark:bg-green-500/10 rounded-xl flex items-center justify-center mb-4">
+            <svg class="w-5 h-5 text-green-600 dark:text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+          </div>
+          <h3 class="font-bold text-gray-900 dark:text-white text-lg mb-2">Payments + POS</h3>
+          <p class="text-neutral-500 dark:text-gray-500 text-sm leading-relaxed">Stripe checkout, in-person terminal, tips, cash. Revenue tracking per stylist. No third-party payment app needed.</p>
+        </div>
+
+        <div class="bg-white dark:bg-[#1a1a1a] rounded-xl p-6 border border-neutral-200 dark:border-neutral-800 card-hover">
+          <div class="w-10 h-10 bg-rose-100 dark:bg-rose-500/10 rounded-xl flex items-center justify-center mb-4">
+            <svg class="w-5 h-5 text-rose-600 dark:text-rose-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/></svg>
+          </div>
+          <h3 class="font-bold text-gray-900 dark:text-white text-lg mb-2">Memberships</h3>
+          <p class="text-neutral-500 dark:text-gray-500 text-sm leading-relaxed">Monthly membership plans for regulars. Automatic Stripe billing, member perks, retention built in.</p>
+        </div>
+
+        <div class="bg-white dark:bg-[#1a1a1a] rounded-xl p-6 border border-neutral-200 dark:border-neutral-800 card-hover">
+          <div class="w-10 h-10 bg-amber-100 dark:bg-amber-500/10 rounded-xl flex items-center justify-center mb-4">
+            <svg class="w-5 h-5 text-amber-600 dark:text-amber-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 8v13m0-13V6a2 2 0 112 2h-2zm0 0V5.5A2.5 2.5 0 109.5 8H12zm-7 4h14M5 12a2 2 0 110-4h14a2 2 0 110 4M5 12v7a2 2 0 002 2h10a2 2 0 002-2v-7"/></svg>
+          </div>
+          <h3 class="font-bold text-gray-900 dark:text-white text-lg mb-2">Gift Cards</h3>
+          <p class="text-neutral-500 dark:text-gray-500 text-sm leading-relaxed">Digital gift cards for haircuts, color, any service. Bought online, emailed instantly, redeemed at checkout.</p>
+        </div>
+
+        <div class="bg-white dark:bg-[#1a1a1a] rounded-xl p-6 border border-neutral-200 dark:border-neutral-800 card-hover">
+          <div class="w-10 h-10 bg-indigo-100 dark:bg-indigo-500/10 rounded-xl flex items-center justify-center mb-4">
+            <svg class="w-5 h-5 text-indigo-600 dark:text-indigo-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 17v-2m3 2v-4m3 4v-6m2 10H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
+          </div>
+          <h3 class="font-bold text-gray-900 dark:text-white text-lg mb-2">Client History + CRM</h3>
+          <p class="text-neutral-500 dark:text-gray-500 text-sm leading-relaxed">Full client profiles with visit history, preferences, notes, spending. Know every client before they sit in the chair.</p>
         </div>
       </div>
 
-      <div class="mt-12 bg-gray-950 rounded-xl p-6 font-mono text-sm shadow-lg">
-        <div class="text-green-400/60 mb-2">$ wc -l ./src/**/*.{ts,tsx} | tail -1</div>
-        <div class="text-white">This is a real production codebase. Not a template. Not a proof of concept.</div>
-        <div class="text-white mt-1">Real customers. Real money. Real business operations. Every day.</div>
+      <!-- Mangomint comparison -->
+      <div class="mt-12 bg-neutral-50 dark:bg-[#0a0a0a] rounded-2xl p-8 border border-neutral-200 dark:border-neutral-800">
+        <h3 class="font-bold text-gray-900 dark:text-white text-xl mb-6">Why not Mangomint?</h3>
+        <div class="grid md:grid-cols-2 gap-6">
+          <div>
+            <div class="text-sm font-semibold text-neutral-400 uppercase tracking-wider mb-3">Mangomint</div>
+            <div class="space-y-2 text-sm text-neutral-500">
+              <div>$175/mo for 1 provider</div>
+              <div>$350/mo for 2-3 providers</div>
+              <div>$500+/mo for a full salon</div>
+              <div>Generic platform, same as everyone else</div>
+              <div>Their features, their timeline, their rules</div>
+            </div>
+          </div>
+          <div>
+            <div class="text-sm font-semibold text-purple-600 dark:text-purple-400 uppercase tracking-wider mb-3">Weeks Web</div>
+            <div class="space-y-2 text-sm text-gray-700 dark:text-gray-300">
+              <div class="font-semibold">Flat rate. Unlimited providers.</div>
+              <div>Custom-built for your salon specifically</div>
+              <div>You own the relationship, we build what you need</div>
+              <div>Same payment processing, better price</div>
+              <div>Need a feature? We build it. Fast.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      </div><!-- end salon tab -->
+
+    </div>
+  </section>
+
+  <!-- Live proof -->
+  <section id="proof" class="py-24 px-6">
+    <div class="max-w-6xl mx-auto">
+      <div class="grid lg:grid-cols-2 gap-12 items-center">
+        <div>
+          <div class="inline-flex items-center gap-2 bg-green-50 dark:bg-green-500/10 text-green-700 dark:text-green-400 text-xs font-semibold px-3 py-1.5 rounded-full mb-6 border border-green-200 dark:border-green-500/20">
+            <span class="w-1.5 h-1.5 bg-green-500 rounded-full animate-pulse"></span>
+            Live in production
+          </div>
+          <h2 class="text-3xl md:text-4xl font-black text-gray-900 dark:text-white mb-6">
+            Don't take our word for it.<br>Go look at it.
+          </h2>
+          <p class="text-neutral-500 dark:text-gray-500 text-lg leading-relaxed mb-8">
+            Zany's Play World in Newnan, GA runs their entire operation on this platform. Real parents booking parties, signing waivers, buying gift cards, and checking in with memberships. Every day.
+          </p>
+          <div class="space-y-3 mb-8">
+            <div class="flex items-center gap-3 text-sm">
+              <svg class="w-5 h-5 text-green-500 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+              <span class="text-gray-700 dark:text-gray-300">Open play booking with age-based pricing ($5 / $12 / $16)</span>
+            </div>
+            <div class="flex items-center gap-3 text-sm">
+              <svg class="w-5 h-5 text-green-500 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+              <span class="text-gray-700 dark:text-gray-300">Birthday parties ($200 weekday / $250 weekend)</span>
+            </div>
+            <div class="flex items-center gap-3 text-sm">
+              <svg class="w-5 h-5 text-green-500 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+              <span class="text-gray-700 dark:text-gray-300">$49/mo unlimited memberships with Stripe billing</span>
+            </div>
+            <div class="flex items-center gap-3 text-sm">
+              <svg class="w-5 h-5 text-green-500 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+              <span class="text-gray-700 dark:text-gray-300">Digital waivers with phone verification</span>
+            </div>
+            <div class="flex items-center gap-3 text-sm">
+              <svg class="w-5 h-5 text-green-500 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+              <span class="text-gray-700 dark:text-gray-300">Stripe Terminal POS + cash drawer at the front desk</span>
+            </div>
+            <div class="flex items-center gap-3 text-sm">
+              <svg class="w-5 h-5 text-green-500 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+              <span class="text-gray-700 dark:text-gray-300">Summer camps, spring break, Easter events with registration</span>
+            </div>
+          </div>
+          <a href="https://zanysplayworld.com" target="_blank" class="inline-flex items-center gap-2 bg-gray-900 dark:bg-purple-600 text-white font-bold px-6 py-3 rounded-xl hover:bg-gray-800 dark:hover:bg-purple-500 transition">
+            Visit zanysplayworld.com
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
+          </a>
+        </div>
+
+        <!-- Terminal (always dark) -->
+        <div class="bg-gray-950 rounded-xl overflow-hidden shadow-xl">
+          <div class="flex items-center gap-2 px-4 py-3 border-b border-gray-800">
+            <div class="w-3 h-3 rounded-full bg-red-500/80"></div>
+            <div class="w-3 h-3 rounded-full bg-yellow-500/80"></div>
+            <div class="w-3 h-3 rounded-full bg-green-500/80"></div>
+            <span class="ml-3 text-xs text-gray-500 font-mono">zanysplayworld.com</span>
+          </div>
+          <div class="p-6 font-mono text-sm space-y-2">
+            <div><span class="text-green-400">STATUS</span> <span class="text-gray-600">......</span> <span class="text-green-400 font-bold">LIVE</span></div>
+            <div><span class="text-green-400">BUSINESS</span> <span class="text-gray-600">....</span> <span class="text-white">Zany's Play World</span></div>
+            <div><span class="text-green-400">LOCATION</span> <span class="text-gray-600">....</span> <span class="text-white">Newnan, GA</span></div>
+            <div><span class="text-green-400">TYPE</span> <span class="text-gray-600">........</span> <span class="text-white">Indoor Play Center</span></div>
+            <div><span class="text-green-400">FEATURES</span> <span class="text-gray-600">....</span> <span class="text-white">20+ modules</span></div>
+            <div><span class="text-green-400">PAYMENTS</span> <span class="text-gray-600">....</span> <span class="text-white">Stripe + Terminal + Cash</span></div>
+            <div><span class="text-green-400">STACK</span> <span class="text-gray-600">.......</span> <span class="text-white">Next.js / Prisma / Supabase</span></div>
+            <div><span class="text-green-400">COMMS</span> <span class="text-gray-600">.......</span> <span class="text-white">Resend + Twilio</span></div>
+            <div class="pt-2 text-green-400/50">$ <span class="blink">_</span></div>
+          </div>
+        </div>
       </div>
     </div>
   </section>
 
-  <!-- Tech stack -->
-  <section id="stack" class="py-16 px-6">
+  <!-- Problems we solve -->
+  <section id="problems" class="py-24 px-6 bg-white dark:bg-[#111] border-y border-neutral-200 dark:border-neutral-800">
     <div class="max-w-6xl mx-auto">
-      <div class="font-mono text-sm text-green-600/70 dark:text-green-500/60 mb-6">$ cat package.json | jq '.dependencies | keys'</div>
-      <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-3">
-        <div class="bg-white dark:bg-[#1a1a1a] rounded-lg border border-neutral-200 dark:border-neutral-800 px-4 py-3 font-mono text-sm text-center text-gray-900 dark:text-white font-semibold">Next.js</div>
-        <div class="bg-white dark:bg-[#1a1a1a] rounded-lg border border-neutral-200 dark:border-neutral-800 px-4 py-3 font-mono text-sm text-center text-gray-900 dark:text-white font-semibold">React</div>
-        <div class="bg-white dark:bg-[#1a1a1a] rounded-lg border border-neutral-200 dark:border-neutral-800 px-4 py-3 font-mono text-sm text-center text-gray-900 dark:text-white font-semibold">TypeScript</div>
-        <div class="bg-white dark:bg-[#1a1a1a] rounded-lg border border-neutral-200 dark:border-neutral-800 px-4 py-3 font-mono text-sm text-center text-gray-900 dark:text-white font-semibold">Stripe</div>
-        <div class="bg-white dark:bg-[#1a1a1a] rounded-lg border border-neutral-200 dark:border-neutral-800 px-4 py-3 font-mono text-sm text-center text-gray-900 dark:text-white font-semibold">Prisma</div>
-        <div class="bg-white dark:bg-[#1a1a1a] rounded-lg border border-neutral-200 dark:border-neutral-800 px-4 py-3 font-mono text-sm text-center text-gray-900 dark:text-white font-semibold">Supabase</div>
-        <div class="bg-white dark:bg-[#1a1a1a] rounded-lg border border-neutral-200 dark:border-neutral-800 px-4 py-3 font-mono text-sm text-center text-gray-900 dark:text-white font-semibold">Tailwind</div>
-        <div class="bg-white dark:bg-[#1a1a1a] rounded-lg border border-neutral-200 dark:border-neutral-800 px-4 py-3 font-mono text-sm text-center text-gray-900 dark:text-white font-semibold">Stripe Terminal</div>
-        <div class="bg-white dark:bg-[#1a1a1a] rounded-lg border border-neutral-200 dark:border-neutral-800 px-4 py-3 font-mono text-sm text-center text-gray-900 dark:text-white font-semibold">Resend</div>
-        <div class="bg-white dark:bg-[#1a1a1a] rounded-lg border border-neutral-200 dark:border-neutral-800 px-4 py-3 font-mono text-sm text-center text-gray-900 dark:text-white font-semibold">Twilio</div>
-        <div class="bg-white dark:bg-[#1a1a1a] rounded-lg border border-neutral-200 dark:border-neutral-800 px-4 py-3 font-mono text-sm text-center text-gray-900 dark:text-white font-semibold">Vercel</div>
-        <div class="bg-white dark:bg-[#1a1a1a] rounded-lg border border-neutral-200 dark:border-neutral-800 px-4 py-3 font-mono text-sm text-center text-gray-900 dark:text-white font-semibold">Upstash</div>
+      <div class="max-w-2xl mb-16">
+        <h2 class="text-3xl md:text-4xl font-black text-gray-900 dark:text-white">Sound familiar?</h2>
+        <p class="mt-4 text-neutral-500 dark:text-gray-500 text-lg">Every play center we've talked to has the same problems. We built one system that fixes all of them.</p>
       </div>
-    </div>
-  </section>
 
-  <!-- Industries -->
-  <section class="py-24 px-6 bg-white dark:bg-[#111] border-y border-neutral-200 dark:border-neutral-800">
-    <div class="max-w-6xl mx-auto">
-      <div class="font-mono text-sm text-green-600/70 dark:text-green-500/60 mb-4">$ ls ./clients/</div>
-      <h2 class="text-3xl md:text-4xl font-black text-gray-900 dark:text-white mb-4">Same core. Different skin.</h2>
-      <p class="text-neutral-500 dark:text-gray-500 text-lg mb-12 max-w-2xl">
-        The platform adapts to any local business in Newnan and beyond. Bookings, payments, CRM, and admin are universal. We customize the last 20%.
-      </p>
+      <div class="grid md:grid-cols-2 gap-6">
+        <div class="flex gap-4 p-6 bg-red-50 dark:bg-red-500/5 rounded-xl border border-red-100 dark:border-red-500/10">
+          <div class="text-red-400 dark:text-red-500 text-xl font-black shrink-0 mt-0.5">&times;</div>
+          <div>
+            <h3 class="font-bold text-gray-900 dark:text-white mb-1">Paper waivers in a binder</h3>
+            <p class="text-neutral-500 dark:text-gray-500 text-sm">Can't find them, can't search them, they pile up, and they're a liability nightmare.</p>
+          </div>
+        </div>
+        <div class="flex gap-4 p-6 bg-green-50 dark:bg-green-500/5 rounded-xl border border-green-100 dark:border-green-500/10">
+          <div class="text-green-500 text-xl font-black shrink-0 mt-0.5">&check;</div>
+          <div>
+            <h3 class="font-bold text-gray-900 dark:text-white mb-1">Digital waivers, searchable by phone</h3>
+            <p class="text-neutral-500 dark:text-gray-500 text-sm">Parents sign on their phone. Stored forever. Look up any waiver in 2 seconds.</p>
+          </div>
+        </div>
 
-      <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-4">
-        <div class="bg-white dark:bg-[#1a1a1a] rounded-xl p-6 border border-neutral-200 dark:border-neutral-800 card-hover group">
-          <div class="font-mono text-xs text-green-600 dark:text-green-500 mb-3 group-hover:text-purple-600 dark:group-hover:text-purple-400 transition">play-centers/</div>
-          <h3 class="font-bold text-gray-900 dark:text-white text-lg mb-2">Play Centers</h3>
-          <div class="text-xs font-mono text-green-600 dark:text-green-500 mb-2 bg-green-50 dark:bg-green-500/10 inline-block px-2 py-0.5 rounded border border-green-200 dark:border-green-500/20">LIVE: zanysplayworld.com</div>
-          <p class="text-neutral-500 dark:text-gray-500 text-sm">Booking, waivers, memberships, gift cards, party packages, event registration, POS.</p>
+        <div class="flex gap-4 p-6 bg-red-50 dark:bg-red-500/5 rounded-xl border border-red-100 dark:border-red-500/10">
+          <div class="text-red-400 dark:text-red-500 text-xl font-black shrink-0 mt-0.5">&times;</div>
+          <div>
+            <h3 class="font-bold text-gray-900 dark:text-white mb-1">Party bookings over the phone</h3>
+            <p class="text-neutral-500 dark:text-gray-500 text-sm">Playing phone tag with parents, losing bookings, double-booking rooms, manual payment tracking.</p>
+          </div>
         </div>
-        <div class="bg-white dark:bg-[#1a1a1a] rounded-xl p-6 border border-neutral-200 dark:border-neutral-800 card-hover group">
-          <div class="font-mono text-xs text-green-600 dark:text-green-500 mb-3 group-hover:text-purple-600 dark:group-hover:text-purple-400 transition">salons/</div>
-          <h3 class="font-bold text-gray-900 dark:text-white text-lg mb-2">Salons</h3>
-          <div class="text-xs font-mono text-amber-600 mb-2 bg-amber-50 dark:bg-amber-500/10 inline-block px-2 py-0.5 rounded border border-amber-200 dark:border-amber-500/20">BUILDING: book.zanycuts.com</div>
-          <p class="text-neutral-500 dark:text-gray-500 text-sm">Appointments, stylist scheduling, client history, product tracking, recurring memberships.</p>
+        <div class="flex gap-4 p-6 bg-green-50 dark:bg-green-500/5 rounded-xl border border-green-100 dark:border-green-500/10">
+          <div class="text-green-500 text-xl font-black shrink-0 mt-0.5">&check;</div>
+          <div>
+            <h3 class="font-bold text-gray-900 dark:text-white mb-1">Self-serve online booking with deposits</h3>
+            <p class="text-neutral-500 dark:text-gray-500 text-sm">Parents book and pay online. You get notified. Room is blocked. Deposit is collected. Done.</p>
+          </div>
         </div>
-        <div class="bg-white dark:bg-[#1a1a1a] rounded-xl p-6 border border-neutral-200 dark:border-neutral-800 card-hover group">
-          <div class="font-mono text-xs text-green-600 dark:text-green-500 mb-3 group-hover:text-purple-600 dark:group-hover:text-purple-400 transition">services/</div>
-          <h3 class="font-bold text-gray-900 dark:text-white text-lg mb-2">Service Businesses</h3>
-          <p class="text-neutral-500 dark:text-gray-500 text-sm">Job scheduling, quoting, invoicing, field staff, customer portals.</p>
+
+        <div class="flex gap-4 p-6 bg-red-50 dark:bg-red-500/5 rounded-xl border border-red-100 dark:border-red-500/10">
+          <div class="text-red-400 dark:text-red-500 text-xl font-black shrink-0 mt-0.5">&times;</div>
+          <div>
+            <h3 class="font-bold text-gray-900 dark:text-white mb-1">No recurring revenue</h3>
+            <p class="text-neutral-500 dark:text-gray-500 text-sm">Every dollar depends on walk-ins. Slow Tuesday? Empty. You're starting from zero every day.</p>
+          </div>
         </div>
-        <div class="bg-white dark:bg-[#1a1a1a] rounded-xl p-6 border border-neutral-200 dark:border-neutral-800 card-hover group">
-          <div class="font-mono text-xs text-green-600 dark:text-green-500 mb-3 group-hover:text-purple-600 dark:group-hover:text-purple-400 transition">local/</div>
-          <h3 class="font-bold text-gray-900 dark:text-white text-lg mb-2">Any Local Business</h3>
-          <p class="text-neutral-500 dark:text-gray-500 text-sm">Gyms, studios, clinics, tutoring, pet care. Any Newnan business that takes bookings and payments.</p>
+        <div class="flex gap-4 p-6 bg-green-50 dark:bg-green-500/5 rounded-xl border border-green-100 dark:border-green-500/10">
+          <div class="text-green-500 text-xl font-black shrink-0 mt-0.5">&check;</div>
+          <div>
+            <h3 class="font-bold text-gray-900 dark:text-white mb-1">Memberships that bill automatically</h3>
+            <p class="text-neutral-500 dark:text-gray-500 text-sm">$49/mo unlimited play. Money comes in whether it's busy or not. Members check in at the desk with one tap.</p>
+          </div>
+        </div>
+
+        <div class="flex gap-4 p-6 bg-red-50 dark:bg-red-500/5 rounded-xl border border-red-100 dark:border-red-500/10">
+          <div class="text-red-400 dark:text-red-500 text-xl font-black shrink-0 mt-0.5">&times;</div>
+          <div>
+            <h3 class="font-bold text-gray-900 dark:text-white mb-1">5 different tools that don't talk to each other</h3>
+            <p class="text-neutral-500 dark:text-gray-500 text-sm">Square for payments, Google Forms for waivers, Facebook for events, a notebook for parties, Excel for... everything else.</p>
+          </div>
+        </div>
+        <div class="flex gap-4 p-6 bg-green-50 dark:bg-green-500/5 rounded-xl border border-green-100 dark:border-green-500/10">
+          <div class="text-green-500 text-xl font-black shrink-0 mt-0.5">&check;</div>
+          <div>
+            <h3 class="font-bold text-gray-900 dark:text-white mb-1">One system for everything</h3>
+            <p class="text-neutral-500 dark:text-gray-500 text-sm">Bookings, payments, waivers, memberships, gift cards, events, customers, reports. One login. One dashboard.</p>
+          </div>
         </div>
       </div>
     </div>
   </section>
 
   <!-- Pricing -->
-  <section id="pricing" class="py-24 px-6 bg-white dark:bg-[#111] border-y border-neutral-200 dark:border-neutral-800">
+  <section id="pricing" class="py-24 px-6">
     <div class="max-w-6xl mx-auto">
-      <div class="font-mono text-sm text-green-600/70 dark:text-green-500/60 mb-4">$ cat pricing.yml</div>
-      <h2 class="text-3xl md:text-4xl font-black text-gray-900 dark:text-white mb-12">What clients pay.</h2>
+      <div class="max-w-2xl mb-16">
+        <h2 class="text-3xl md:text-4xl font-black text-gray-900 dark:text-white">Simple pricing. No surprises.</h2>
+        <p class="mt-4 text-neutral-500 dark:text-gray-500 text-lg">One platform, everything included. You're probably paying more than this for the 5 tools you're duct-taping together right now.</p>
+      </div>
 
-      <div class="grid md:grid-cols-3 gap-4">
-        <div class="bg-white dark:bg-[#1a1a1a] rounded-xl p-8 border border-neutral-200 dark:border-neutral-800 card-hover">
-          <div class="font-mono text-xs text-neutral-500 mb-4">tier: starter</div>
-          <div class="text-3xl font-black text-gray-900 dark:text-white">$299<span class="text-lg font-normal text-neutral-500">/mo</span></div>
-          <div class="mt-6 space-y-2 font-mono text-sm text-neutral-500">
-            <div>+ booking system</div>
-            <div>+ payments</div>
-            <div>+ customer management</div>
-            <div>+ admin dashboard</div>
-            <div>+ email support</div>
+      <div class="grid md:grid-cols-2 gap-6 max-w-4xl">
+        <div class="bg-white dark:bg-[#1a1a1a] rounded-2xl p-8 border border-neutral-200 dark:border-neutral-800 card-hover">
+          <div class="text-sm font-semibold text-neutral-500 uppercase tracking-wider mb-4">Standard</div>
+          <div class="text-4xl font-black text-gray-900 dark:text-white">$399<span class="text-lg font-normal text-neutral-400">/mo</span></div>
+          <p class="mt-3 text-sm text-neutral-500">Everything you need to run your play center.</p>
+          <div class="mt-8 space-y-3">
+            <div class="flex items-center gap-3 text-sm text-gray-700 dark:text-gray-300">
+              <svg class="w-4 h-4 text-purple-500 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+              Online booking (open play + parties)
+            </div>
+            <div class="flex items-center gap-3 text-sm text-gray-700 dark:text-gray-300">
+              <svg class="w-4 h-4 text-purple-500 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+              Stripe payments + POS terminal
+            </div>
+            <div class="flex items-center gap-3 text-sm text-gray-700 dark:text-gray-300">
+              <svg class="w-4 h-4 text-purple-500 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+              Digital waivers
+            </div>
+            <div class="flex items-center gap-3 text-sm text-gray-700 dark:text-gray-300">
+              <svg class="w-4 h-4 text-purple-500 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+              Memberships + subscriptions
+            </div>
+            <div class="flex items-center gap-3 text-sm text-gray-700 dark:text-gray-300">
+              <svg class="w-4 h-4 text-purple-500 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+              Gift cards
+            </div>
+            <div class="flex items-center gap-3 text-sm text-gray-700 dark:text-gray-300">
+              <svg class="w-4 h-4 text-purple-500 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+              Admin dashboard + reports
+            </div>
+            <div class="flex items-center gap-3 text-sm text-gray-700 dark:text-gray-300">
+              <svg class="w-4 h-4 text-purple-500 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+              Email + SMS notifications
+            </div>
+            <div class="flex items-center gap-3 text-sm text-gray-700 dark:text-gray-300">
+              <svg class="w-4 h-4 text-purple-500 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+              Coupons + QR codes
+            </div>
           </div>
         </div>
 
-        <div class="bg-white dark:bg-[#1a1a1a] rounded-xl p-8 border-2 border-gray-900 dark:border-green-500/40 relative card-hover">
-          <div class="absolute -top-3 left-6 font-mono text-xs bg-gray-900 dark:bg-green-600 text-white px-2 py-0.5 rounded font-bold">RECOMMENDED</div>
-          <div class="font-mono text-xs text-green-600 dark:text-green-500 mb-4">tier: professional</div>
-          <div class="text-3xl font-black text-gray-900 dark:text-white">$499<span class="text-lg font-normal text-neutral-500">/mo</span></div>
-          <div class="mt-6 space-y-2 font-mono text-sm">
-            <div class="text-neutral-500">+ everything in starter</div>
-            <div class="text-green-600 dark:text-green-500 font-medium">+ POS terminal</div>
-            <div class="text-green-600 dark:text-green-500 font-medium">+ memberships</div>
-            <div class="text-green-600 dark:text-green-500 font-medium">+ email + SMS automation</div>
-            <div class="text-green-600 dark:text-green-500 font-medium">+ priority support</div>
-          </div>
-        </div>
-
-        <div class="bg-white dark:bg-[#1a1a1a] rounded-xl p-8 border border-neutral-200 dark:border-neutral-800 card-hover">
-          <div class="font-mono text-xs text-neutral-500 mb-4">tier: enterprise</div>
-          <div class="text-3xl font-black text-gray-900 dark:text-white">$799<span class="text-lg font-normal text-neutral-500">/mo</span></div>
-          <div class="mt-6 space-y-2 font-mono text-sm text-neutral-500">
-            <div>+ everything in professional</div>
-            <div>+ multi-location</div>
-            <div>+ custom modules</div>
-            <div>+ API access</div>
-            <div>+ dedicated support</div>
+        <div class="bg-purple-600 rounded-2xl p-8 text-white shadow-xl shadow-purple-200 dark:shadow-none relative card-hover">
+          <div class="absolute -top-3 left-6 bg-amber-400 text-gray-900 text-xs font-bold px-3 py-1 rounded-full">Recommended</div>
+          <div class="text-sm font-semibold text-purple-200 uppercase tracking-wider mb-4">Growth</div>
+          <div class="text-4xl font-black">$599<span class="text-lg font-normal text-purple-300">/mo</span></div>
+          <p class="mt-3 text-sm text-purple-200">Everything in Standard, plus seasonal events and custom features.</p>
+          <div class="mt-8 space-y-3">
+            <div class="flex items-center gap-3 text-sm">
+              <svg class="w-4 h-4 text-purple-200 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+              Everything in Standard
+            </div>
+            <div class="flex items-center gap-3 text-sm">
+              <svg class="w-4 h-4 text-purple-200 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+              Event + camp registration pages
+            </div>
+            <div class="flex items-center gap-3 text-sm">
+              <svg class="w-4 h-4 text-purple-200 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+              Waitlist management
+            </div>
+            <div class="flex items-center gap-3 text-sm">
+              <svg class="w-4 h-4 text-purple-200 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+              Custom branding
+            </div>
+            <div class="flex items-center gap-3 text-sm">
+              <svg class="w-4 h-4 text-purple-200 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+              Custom feature requests
+            </div>
+            <div class="flex items-center gap-3 text-sm">
+              <svg class="w-4 h-4 text-purple-200 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+              Priority support
+            </div>
+            <div class="flex items-center gap-3 text-sm">
+              <svg class="w-4 h-4 text-purple-200 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+              Facebook integration
+            </div>
           </div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- CTA -->
+  <!-- How we work -->
   <section class="py-24 px-6">
+    <div class="max-w-6xl mx-auto">
+      <div class="max-w-2xl mb-16">
+        <h2 class="text-3xl md:text-4xl font-black text-gray-900 dark:text-white">We build fast. Really fast.</h2>
+        <p class="mt-4 text-neutral-500 dark:text-gray-500 text-lg">We're a dev shop that specializes in play center and salon software. We use AI-assisted development to ship production features in days, not months. Need something custom? We can probably build it this week.</p>
+      </div>
+
+      <div class="grid md:grid-cols-3 gap-6">
+        <div class="bg-white dark:bg-[#1a1a1a] rounded-xl p-6 border border-neutral-200 dark:border-neutral-800">
+          <div class="text-3xl font-black text-purple-600 dark:text-purple-400 mb-3">1.</div>
+          <h3 class="font-bold text-gray-900 dark:text-white text-lg mb-2">You tell us what you need</h3>
+          <p class="text-neutral-500 dark:text-gray-500 text-sm">Walk us through your business. What's working, what's broken, what you wish you had. We've heard it all from play centers and salons.</p>
+        </div>
+        <div class="bg-white dark:bg-[#1a1a1a] rounded-xl p-6 border border-neutral-200 dark:border-neutral-800">
+          <div class="text-3xl font-black text-purple-600 dark:text-purple-400 mb-3">2.</div>
+          <h3 class="font-bold text-gray-900 dark:text-white text-lg mb-2">We configure + customize</h3>
+          <p class="text-neutral-500 dark:text-gray-500 text-sm">We start from our proven platform and tailor it to your business. Your branding, your pricing, your workflows. Custom features built on demand.</p>
+        </div>
+        <div class="bg-white dark:bg-[#1a1a1a] rounded-xl p-6 border border-neutral-200 dark:border-neutral-800">
+          <div class="text-3xl font-black text-purple-600 dark:text-purple-400 mb-3">3.</div>
+          <h3 class="font-bold text-gray-900 dark:text-white text-lg mb-2">You're live in weeks</h3>
+          <p class="text-neutral-500 dark:text-gray-500 text-sm">Not months. Not "Phase 1." A full working system your staff can use and your customers can book on. We keep improving it from there.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="py-24 px-6 bg-white dark:bg-[#111] border-t border-neutral-200 dark:border-neutral-800">
     <div class="max-w-4xl mx-auto text-center">
-      <div class="font-mono text-sm text-green-600/70 dark:text-green-500/60 mb-6">$ ./pitch.sh</div>
       <h2 class="text-3xl md:text-4xl font-black text-gray-900 dark:text-white">
-        We already built one.<br>
-        <span class="text-green-600 dark:text-green-500">Yours is next.</span>
+        Your business deserves<br>better than a spreadsheet.
       </h2>
       <p class="mt-6 text-neutral-500 dark:text-gray-500 text-lg max-w-xl mx-auto">
-        Zany's Play World is live right here in Newnan. Your business is next.
+        We're based in Newnan, GA. We build software for play centers and salons. Zany's Play World and Zany Cuts both run on our platform. Yours can too.
       </p>
       <div class="mt-10 flex flex-col sm:flex-row justify-center gap-4">
-        <a href="dashboard.html" class="bg-gray-900 dark:bg-green-600 text-white font-bold px-8 py-3.5 rounded-lg hover:bg-gray-800 dark:hover:bg-green-500 transition font-mono text-sm">
-          EXPLORE DASHBOARD
+        <a href="dashboard.html" class="bg-purple-600 text-white font-bold px-8 py-3.5 rounded-xl hover:bg-purple-700 transition shadow-lg shadow-purple-200 dark:shadow-none">
+          Explore the Dashboard
         </a>
-        <a href="https://zanysplayworld.com" target="_blank" class="border border-neutral-200 dark:border-neutral-700 text-gray-700 dark:text-gray-300 font-medium px-8 py-3.5 rounded-lg hover:border-neutral-400 dark:hover:border-green-500/50 hover:text-gray-900 dark:hover:text-white transition font-mono text-sm">
-          SEE ZANY'S LIVE &rarr;
+        <a href="https://zanysplayworld.com" target="_blank" class="border border-neutral-200 dark:border-neutral-700 text-gray-700 dark:text-gray-300 font-semibold px-8 py-3.5 rounded-xl hover:border-neutral-400 dark:hover:border-neutral-500 transition">
+          See It Live at Zany's
         </a>
       </div>
     </div>
@@ -305,17 +582,21 @@
   <!-- Footer -->
   <footer class="border-t border-neutral-200 dark:border-neutral-800 py-8 px-6">
     <div class="max-w-6xl mx-auto flex flex-col md:flex-row justify-between items-center gap-4">
-      <div class="font-mono text-sm text-neutral-500">
-        <span class="text-green-600 dark:text-green-500">~/</span>weeks-web
+      <div class="flex items-center gap-2">
+        <div class="w-7 h-7 bg-purple-600 rounded-lg flex items-center justify-center">
+          <span class="text-white font-bold text-xs">W</span>
+        </div>
+        <span class="font-bold text-gray-900 dark:text-white">Weeks Web</span>
+        <span class="text-neutral-400 dark:text-neutral-600 text-sm ml-1">Newnan, GA</span>
       </div>
-      <div class="flex gap-6 font-mono text-xs text-neutral-500">
-        <a href="#proof" class="hover:text-green-600 dark:hover:text-green-500 transition">[proof]</a>
-        <a href="#stack" class="hover:text-green-600 dark:hover:text-green-500 transition">[stack]</a>
-        <a href="#pricing" class="hover:text-green-600 dark:hover:text-green-500 transition">[pricing]</a>
-        <a href="https://zanysplayworld.com" target="_blank" class="hover:text-green-600 dark:hover:text-green-500 transition">[zanysplayworld.com]</a>
-        <a href="dashboard.html" class="hover:text-green-600 dark:hover:text-green-500 transition">[dashboard]</a>
+      <div class="flex gap-6 text-sm text-neutral-500">
+        <a href="#features" class="hover:text-gray-900 dark:hover:text-white transition">Features</a>
+        <a href="#proof" class="hover:text-gray-900 dark:hover:text-white transition">Live Proof</a>
+        <a href="#pricing" class="hover:text-gray-900 dark:hover:text-white transition">Pricing</a>
+        <a href="https://zanysplayworld.com" target="_blank" class="hover:text-gray-900 dark:hover:text-white transition">Zany's Play World</a>
+        <a href="dashboard.html" class="hover:text-gray-900 dark:hover:text-white transition">Dashboard</a>
       </div>
-      <div class="font-mono text-xs text-neutral-500">&copy; 2026</div>
+      <div class="text-sm text-neutral-400">&copy; 2026 Weeks Web</div>
     </div>
   </footer>
 
