@@ -1,0 +1,547 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Weeks Warez — Business Software That Scales</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              50: '#eef2ff',
+              100: '#e0e7ff',
+              200: '#c7d2fe',
+              300: '#a5b4fc',
+              400: '#818cf8',
+              500: '#6366f1',
+              600: '#4f46e5',
+              700: '#4338ca',
+              800: '#3730a3',
+              900: '#312e81',
+              950: '#1e1b4b',
+            }
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+    body { font-family: 'Inter', sans-serif; }
+    .gradient-text {
+      background: linear-gradient(135deg, #6366f1, #8b5cf6, #a78bfa);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .hero-gradient {
+      background: radial-gradient(ellipse at 30% 0%, rgba(99, 102, 241, 0.15) 0%, transparent 50%),
+                  radial-gradient(ellipse at 70% 0%, rgba(139, 92, 246, 0.1) 0%, transparent 50%);
+    }
+    .card-hover { transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); }
+    .card-hover:hover { transform: translateY(-4px); box-shadow: 0 20px 40px rgba(0,0,0,0.08); }
+    .stat-card { backdrop-filter: blur(12px); background: rgba(255,255,255,0.7); }
+    .fade-in { animation: fadeIn 0.8s ease-out forwards; opacity: 0; }
+    @keyframes fadeIn { to { opacity: 1; } }
+    .fade-in:nth-child(2) { animation-delay: 0.1s; }
+    .fade-in:nth-child(3) { animation-delay: 0.2s; }
+    .fade-in:nth-child(4) { animation-delay: 0.3s; }
+    .fade-in:nth-child(5) { animation-delay: 0.4s; }
+    .fade-in:nth-child(6) { animation-delay: 0.5s; }
+  </style>
+</head>
+<body class="bg-white text-gray-900 antialiased">
+
+  <!-- Navigation -->
+  <nav class="fixed top-0 w-full bg-white/80 backdrop-blur-lg border-b border-gray-100 z-50" x-data="{ open: false }">
+    <div class="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
+      <a href="index.html" class="flex items-center gap-2">
+        <div class="w-8 h-8 bg-brand-600 rounded-lg flex items-center justify-center">
+          <span class="text-white font-bold text-sm">W</span>
+        </div>
+        <span class="font-bold text-xl tracking-tight">Weeks Warez</span>
+      </a>
+      <div class="hidden md:flex items-center gap-8">
+        <a href="#features" class="text-sm text-gray-600 hover:text-gray-900 transition">Features</a>
+        <a href="#industries" class="text-sm text-gray-600 hover:text-gray-900 transition">Industries</a>
+        <a href="#platform" class="text-sm text-gray-600 hover:text-gray-900 transition">Platform</a>
+        <a href="#pricing" class="text-sm text-gray-600 hover:text-gray-900 transition">Pricing</a>
+        <a href="dashboard.html" class="text-sm text-gray-600 hover:text-gray-900 transition">Live Demo</a>
+        <a href="dashboard.html" class="bg-brand-600 text-white text-sm font-medium px-4 py-2 rounded-lg hover:bg-brand-700 transition">Get Started</a>
+      </div>
+      <button @click="open = !open" class="md:hidden p-2">
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+        </svg>
+      </button>
+    </div>
+    <div x-show="open" x-transition class="md:hidden border-t border-gray-100 bg-white px-6 py-4 space-y-3">
+      <a href="#features" class="block text-sm text-gray-600">Features</a>
+      <a href="#industries" class="block text-sm text-gray-600">Industries</a>
+      <a href="#platform" class="block text-sm text-gray-600">Platform</a>
+      <a href="#pricing" class="block text-sm text-gray-600">Pricing</a>
+      <a href="dashboard.html" class="block text-sm text-gray-600">Live Demo</a>
+      <a href="dashboard.html" class="block bg-brand-600 text-white text-sm font-medium px-4 py-2 rounded-lg text-center">Get Started</a>
+    </div>
+  </nav>
+
+  <!-- Hero -->
+  <section class="hero-gradient pt-32 pb-20 px-6">
+    <div class="max-w-7xl mx-auto">
+      <div class="max-w-3xl">
+        <div class="inline-flex items-center gap-2 bg-brand-50 text-brand-700 text-xs font-semibold px-3 py-1.5 rounded-full mb-6">
+          <span class="w-1.5 h-1.5 bg-brand-500 rounded-full animate-pulse"></span>
+          Now serving 50+ local businesses
+        </div>
+        <h1 class="text-5xl md:text-6xl lg:text-7xl font-extrabold tracking-tight leading-[1.08]">
+          Business software<br>
+          <span class="gradient-text">that actually works.</span>
+        </h1>
+        <p class="mt-6 text-lg md:text-xl text-gray-600 leading-relaxed max-w-2xl">
+          One platform for bookings, payments, client management, and operations. Built once, adapted for any business. Stop juggling five tools and start running on one system designed for you.
+        </p>
+        <div class="mt-10 flex flex-col sm:flex-row gap-4">
+          <a href="dashboard.html" class="bg-brand-600 text-white font-semibold px-8 py-3.5 rounded-xl hover:bg-brand-700 transition text-center shadow-lg shadow-brand-200">
+            See the Platform
+          </a>
+          <a href="#features" class="border border-gray-300 text-gray-700 font-semibold px-8 py-3.5 rounded-xl hover:bg-gray-50 transition text-center">
+            How It Works
+          </a>
+        </div>
+      </div>
+
+      <!-- Social proof stats -->
+      <div class="mt-20 grid grid-cols-2 md:grid-cols-4 gap-6">
+        <div class="stat-card rounded-2xl p-6 border border-gray-100 fade-in">
+          <div class="text-3xl font-bold text-gray-900">$2.4M</div>
+          <div class="text-sm text-gray-500 mt-1">Payments processed</div>
+        </div>
+        <div class="stat-card rounded-2xl p-6 border border-gray-100 fade-in">
+          <div class="text-3xl font-bold text-gray-900">12,800+</div>
+          <div class="text-sm text-gray-500 mt-1">Bookings managed</div>
+        </div>
+        <div class="stat-card rounded-2xl p-6 border border-gray-100 fade-in">
+          <div class="text-3xl font-bold text-gray-900">98.7%</div>
+          <div class="text-sm text-gray-500 mt-1">Client retention</div>
+        </div>
+        <div class="stat-card rounded-2xl p-6 border border-gray-100 fade-in">
+          <div class="text-3xl font-bold text-gray-900">53</div>
+          <div class="text-sm text-gray-500 mt-1">Businesses running</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Features -->
+  <section id="features" class="py-24 px-6 bg-gray-50">
+    <div class="max-w-7xl mx-auto">
+      <div class="text-center max-w-2xl mx-auto mb-16">
+        <h2 class="text-3xl md:text-4xl font-bold tracking-tight">Everything your business needs. Nothing it doesn't.</h2>
+        <p class="mt-4 text-gray-600 text-lg">A complete operations platform that replaces the patchwork of tools you're paying for today.</p>
+      </div>
+
+      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <!-- Feature cards -->
+        <div class="bg-white rounded-2xl p-8 border border-gray-100 card-hover">
+          <div class="w-12 h-12 bg-blue-50 rounded-xl flex items-center justify-center mb-5">
+            <svg class="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
+          </div>
+          <h3 class="text-lg font-semibold mb-2">Smart Booking</h3>
+          <p class="text-gray-600 text-sm leading-relaxed">Online scheduling with availability management, automated reminders, and zero double-bookings. Clients book 24/7.</p>
+        </div>
+
+        <div class="bg-white rounded-2xl p-8 border border-gray-100 card-hover">
+          <div class="w-12 h-12 bg-green-50 rounded-xl flex items-center justify-center mb-5">
+            <svg class="w-6 h-6 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+          </div>
+          <h3 class="text-lg font-semibold mb-2">Integrated Payments</h3>
+          <p class="text-gray-600 text-sm leading-relaxed">Accept payments, send invoices, manage subscriptions, and track revenue. All in one place with real-time reporting.</p>
+        </div>
+
+        <div class="bg-white rounded-2xl p-8 border border-gray-100 card-hover">
+          <div class="w-12 h-12 bg-purple-50 rounded-xl flex items-center justify-center mb-5">
+            <svg class="w-6 h-6 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"/></svg>
+          </div>
+          <h3 class="text-lg font-semibold mb-2">Client Management</h3>
+          <p class="text-gray-600 text-sm leading-relaxed">Full CRM with contact history, preferences, visit tracking, and automated follow-ups. Know every client by name.</p>
+        </div>
+
+        <div class="bg-white rounded-2xl p-8 border border-gray-100 card-hover">
+          <div class="w-12 h-12 bg-amber-50 rounded-xl flex items-center justify-center mb-5">
+            <svg class="w-6 h-6 text-amber-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/></svg>
+          </div>
+          <h3 class="text-lg font-semibold mb-2">Live Dashboards</h3>
+          <p class="text-gray-600 text-sm leading-relaxed">Real-time metrics on revenue, bookings, retention, and operations. See exactly how your business is performing.</p>
+        </div>
+
+        <div class="bg-white rounded-2xl p-8 border border-gray-100 card-hover">
+          <div class="w-12 h-12 bg-rose-50 rounded-xl flex items-center justify-center mb-5">
+            <svg class="w-6 h-6 text-rose-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/></svg>
+          </div>
+          <h3 class="text-lg font-semibold mb-2">Automation</h3>
+          <p class="text-gray-600 text-sm leading-relaxed">Automated reminders, follow-ups, recurring invoices, and task management. Less manual work, fewer mistakes.</p>
+        </div>
+
+        <div class="bg-white rounded-2xl p-8 border border-gray-100 card-hover">
+          <div class="w-12 h-12 bg-cyan-50 rounded-xl flex items-center justify-center mb-5">
+            <svg class="w-6 h-6 text-cyan-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 5a1 1 0 011-1h14a1 1 0 011 1v2a1 1 0 01-1 1H5a1 1 0 01-1-1V5zM4 13a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H5a1 1 0 01-1-1v-6zM16 13a1 1 0 011-1h2a1 1 0 011 1v6a1 1 0 01-1 1h-2a1 1 0 01-1-1v-6z"/></svg>
+          </div>
+          <h3 class="text-lg font-semibold mb-2">Custom Modules</h3>
+          <p class="text-gray-600 text-sm leading-relaxed">Need something specific? We build custom modules fast. Inventory, waivers, memberships, loyalty programs -- whatever you need.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Industries -->
+  <section id="industries" class="py-24 px-6">
+    <div class="max-w-7xl mx-auto">
+      <div class="text-center max-w-2xl mx-auto mb-16">
+        <h2 class="text-3xl md:text-4xl font-bold tracking-tight">One platform. Every business type.</h2>
+        <p class="mt-4 text-gray-600 text-lg">Our core system adapts to your industry. Same reliability, custom fit.</p>
+      </div>
+
+      <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6" x-data="{ active: null }">
+        <div @mouseenter="active = 'salon'" @mouseleave="active = null"
+             class="relative overflow-hidden rounded-2xl border border-gray-200 p-8 transition-all duration-300"
+             :class="active === 'salon' ? 'bg-brand-600 text-white border-brand-600 shadow-xl shadow-brand-200' : 'bg-white hover:border-brand-200'">
+          <div class="text-4xl mb-4">
+            <svg class="w-10 h-10" :class="active === 'salon' ? 'text-white' : 'text-brand-600'" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M5.121 17.804A13.937 13.937 0 0112 16c2.5 0 4.847.655 6.879 1.804M15 10a3 3 0 11-6 0 3 3 0 016 0zm6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+          </div>
+          <h3 class="text-xl font-bold mb-2">Salons & Spas</h3>
+          <p class="text-sm leading-relaxed" :class="active === 'salon' ? 'text-brand-100' : 'text-gray-600'">
+            Appointment booking, stylist schedules, client preferences, product inventory, and recurring membership billing.
+          </p>
+        </div>
+
+        <div @mouseenter="active = 'play'" @mouseleave="active = null"
+             class="relative overflow-hidden rounded-2xl border border-gray-200 p-8 transition-all duration-300"
+             :class="active === 'play' ? 'bg-brand-600 text-white border-brand-600 shadow-xl shadow-brand-200' : 'bg-white hover:border-brand-200'">
+          <div class="text-4xl mb-4">
+            <svg class="w-10 h-10" :class="active === 'play' ? 'text-white' : 'text-brand-600'" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M14.828 14.828a4 4 0 01-5.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+          </div>
+          <h3 class="text-xl font-bold mb-2">Play Centers</h3>
+          <p class="text-sm leading-relaxed" :class="active === 'play' ? 'text-brand-100' : 'text-gray-600'">
+            Party bookings, walk-in tracking, waiver management, birthday packages, and capacity monitoring.
+          </p>
+        </div>
+
+        <div @mouseenter="active = 'service'" @mouseleave="active = null"
+             class="relative overflow-hidden rounded-2xl border border-gray-200 p-8 transition-all duration-300"
+             :class="active === 'service' ? 'bg-brand-600 text-white border-brand-600 shadow-xl shadow-brand-200' : 'bg-white hover:border-brand-200'">
+          <div class="text-4xl mb-4">
+            <svg class="w-10 h-10" :class="active === 'service' ? 'text-white' : 'text-brand-600'" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.066 2.573c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.573 1.066c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.066-2.573c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+          </div>
+          <h3 class="text-xl font-bold mb-2">Service Businesses</h3>
+          <p class="text-sm leading-relaxed" :class="active === 'service' ? 'text-brand-100' : 'text-gray-600'">
+            Job scheduling, quoting, invoicing, field staff management, and customer communication portals.
+          </p>
+        </div>
+
+        <div @mouseenter="active = 'local'" @mouseleave="active = null"
+             class="relative overflow-hidden rounded-2xl border border-gray-200 p-8 transition-all duration-300"
+             :class="active === 'local' ? 'bg-brand-600 text-white border-brand-600 shadow-xl shadow-brand-200' : 'bg-white hover:border-brand-200'">
+          <div class="text-4xl mb-4">
+            <svg class="w-10 h-10" :class="active === 'local' ? 'text-white' : 'text-brand-600'" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"/></svg>
+          </div>
+          <h3 class="text-xl font-bold mb-2">Local Business</h3>
+          <p class="text-sm leading-relaxed" :class="active === 'local' ? 'text-brand-100' : 'text-gray-600'">
+            Whatever your niche, we configure the platform to match. Gyms, studios, clinics, tutoring, pet care, and more.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Platform / How it works -->
+  <section id="platform" class="py-24 px-6 bg-gray-950 text-white">
+    <div class="max-w-7xl mx-auto">
+      <div class="grid lg:grid-cols-2 gap-16 items-center">
+        <div>
+          <h2 class="text-3xl md:text-4xl font-bold tracking-tight">Build once.<br>Deploy everywhere.</h2>
+          <p class="mt-6 text-gray-400 text-lg leading-relaxed">
+            Traditional custom software is expensive because every project starts from zero. We built a modular core platform that handles the fundamentals every business needs -- then we customize the last 20% for each client.
+          </p>
+          <div class="mt-10 space-y-6">
+            <div class="flex gap-4">
+              <div class="w-10 h-10 bg-brand-600 rounded-lg flex items-center justify-center shrink-0 mt-0.5">
+                <span class="text-white font-bold text-sm">1</span>
+              </div>
+              <div>
+                <h4 class="font-semibold text-lg">Core Platform</h4>
+                <p class="text-gray-400 text-sm mt-1">Bookings, payments, CRM, dashboards, and automation come standard. Battle-tested and production-ready.</p>
+              </div>
+            </div>
+            <div class="flex gap-4">
+              <div class="w-10 h-10 bg-brand-600 rounded-lg flex items-center justify-center shrink-0 mt-0.5">
+                <span class="text-white font-bold text-sm">2</span>
+              </div>
+              <div>
+                <h4 class="font-semibold text-lg">Custom Configuration</h4>
+                <p class="text-gray-400 text-sm mt-1">We adapt the platform to your specific industry, workflow, and brand. Fast turnaround -- days, not months.</p>
+              </div>
+            </div>
+            <div class="flex gap-4">
+              <div class="w-10 h-10 bg-brand-600 rounded-lg flex items-center justify-center shrink-0 mt-0.5">
+                <span class="text-white font-bold text-sm">3</span>
+              </div>
+              <div>
+                <h4 class="font-semibold text-lg">Ongoing Value</h4>
+                <p class="text-gray-400 text-sm mt-1">Monthly subscription includes hosting, updates, support, and new features. Your system gets better over time.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="bg-gray-900 rounded-2xl p-8 border border-gray-800">
+          <div class="text-xs text-gray-500 font-mono mb-4">// Platform economics</div>
+          <div class="space-y-4">
+            <div class="flex justify-between items-center py-3 border-b border-gray-800">
+              <span class="text-gray-400">Traditional custom software</span>
+              <span class="text-red-400 font-semibold">$15k-50k per client</span>
+            </div>
+            <div class="flex justify-between items-center py-3 border-b border-gray-800">
+              <span class="text-gray-400">Weeks Warez setup</span>
+              <span class="text-green-400 font-semibold">$2k-5k per client</span>
+            </div>
+            <div class="flex justify-between items-center py-3 border-b border-gray-800">
+              <span class="text-gray-400">Recurring monthly revenue</span>
+              <span class="text-green-400 font-semibold">$299-799/mo each</span>
+            </div>
+            <div class="flex justify-between items-center py-3 border-b border-gray-800">
+              <span class="text-gray-400">Deployment time</span>
+              <span class="text-green-400 font-semibold">1-2 weeks</span>
+            </div>
+            <div class="flex justify-between items-center py-3">
+              <span class="text-gray-400">Gross margin</span>
+              <span class="text-green-400 font-bold text-lg">80%+</span>
+            </div>
+          </div>
+          <div class="mt-6 bg-brand-600/20 border border-brand-500/30 rounded-xl p-4">
+            <p class="text-brand-300 text-sm font-medium">10 clients at $499/mo = $59,880 ARR from one product</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Revenue comparison -->
+  <section class="py-24 px-6 bg-brand-600 text-white">
+    <div class="max-w-7xl mx-auto text-center">
+      <h2 class="text-3xl md:text-4xl font-bold tracking-tight">Software vs. print. The math is clear.</h2>
+      <p class="mt-4 text-brand-200 text-lg max-w-2xl mx-auto">Print jobs are one-and-done. Software creates compounding recurring revenue that grows every month.</p>
+
+      <div class="mt-16 grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+        <div class="bg-white/10 backdrop-blur-sm rounded-2xl p-8 border border-white/20">
+          <div class="text-sm font-semibold text-brand-200 uppercase tracking-wider mb-4">Print Model</div>
+          <div class="text-4xl font-bold">$500</div>
+          <div class="text-brand-200 mt-1">per job, then done</div>
+          <div class="mt-6 space-y-3 text-left text-sm">
+            <div class="flex items-center gap-3 text-brand-200">
+              <svg class="w-4 h-4 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 12H4"/></svg>
+              One-time revenue
+            </div>
+            <div class="flex items-center gap-3 text-brand-200">
+              <svg class="w-4 h-4 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 12H4"/></svg>
+              High material costs
+            </div>
+            <div class="flex items-center gap-3 text-brand-200">
+              <svg class="w-4 h-4 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 12H4"/></svg>
+              Constant hustle for new jobs
+            </div>
+            <div class="flex items-center gap-3 text-brand-200">
+              <svg class="w-4 h-4 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 12H4"/></svg>
+              20-30% margins
+            </div>
+          </div>
+          <div class="mt-8 pt-6 border-t border-white/20">
+            <div class="text-brand-200 text-sm">Year 1 from 10 clients</div>
+            <div class="text-2xl font-bold mt-1">~$5,000</div>
+          </div>
+        </div>
+
+        <div class="bg-white rounded-2xl p-8 text-gray-900 shadow-2xl">
+          <div class="text-sm font-semibold text-brand-600 uppercase tracking-wider mb-4">Software Model</div>
+          <div class="text-4xl font-bold">$499<span class="text-lg font-normal text-gray-500">/mo</span></div>
+          <div class="text-gray-500 mt-1">recurring, per client</div>
+          <div class="mt-6 space-y-3 text-left text-sm">
+            <div class="flex items-center gap-3 text-gray-700">
+              <svg class="w-4 h-4 text-green-500 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+              Monthly recurring revenue
+            </div>
+            <div class="flex items-center gap-3 text-gray-700">
+              <svg class="w-4 h-4 text-green-500 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+              Near-zero marginal cost
+            </div>
+            <div class="flex items-center gap-3 text-gray-700">
+              <svg class="w-4 h-4 text-green-500 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+              Revenue compounds monthly
+            </div>
+            <div class="flex items-center gap-3 text-gray-700">
+              <svg class="w-4 h-4 text-green-500 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+              80%+ margins
+            </div>
+          </div>
+          <div class="mt-8 pt-6 border-t border-gray-200">
+            <div class="text-gray-500 text-sm">Year 1 from 10 clients</div>
+            <div class="text-2xl font-bold mt-1 text-brand-600">$59,880</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Pricing -->
+  <section id="pricing" class="py-24 px-6 bg-gray-50">
+    <div class="max-w-7xl mx-auto">
+      <div class="text-center max-w-2xl mx-auto mb-16">
+        <h2 class="text-3xl md:text-4xl font-bold tracking-tight">Simple, predictable pricing</h2>
+        <p class="mt-4 text-gray-600 text-lg">Every plan includes the full platform. Pick the tier that fits your business.</p>
+      </div>
+
+      <div class="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto">
+        <div class="bg-white rounded-2xl p-8 border border-gray-200 card-hover">
+          <div class="text-sm font-semibold text-gray-500 uppercase tracking-wider">Starter</div>
+          <div class="mt-4 flex items-baseline gap-1">
+            <span class="text-4xl font-bold">$299</span>
+            <span class="text-gray-500">/mo</span>
+          </div>
+          <p class="mt-3 text-sm text-gray-600">For small businesses getting organized.</p>
+          <div class="mt-8 space-y-3">
+            <div class="flex items-center gap-3 text-sm text-gray-700">
+              <svg class="w-4 h-4 text-brand-600 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+              Booking system
+            </div>
+            <div class="flex items-center gap-3 text-sm text-gray-700">
+              <svg class="w-4 h-4 text-brand-600 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+              Payment processing
+            </div>
+            <div class="flex items-center gap-3 text-sm text-gray-700">
+              <svg class="w-4 h-4 text-brand-600 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+              Client management
+            </div>
+            <div class="flex items-center gap-3 text-sm text-gray-700">
+              <svg class="w-4 h-4 text-brand-600 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+              Basic dashboard
+            </div>
+            <div class="flex items-center gap-3 text-sm text-gray-700">
+              <svg class="w-4 h-4 text-brand-600 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+              Email support
+            </div>
+          </div>
+          <a href="dashboard.html" class="mt-8 block text-center border border-gray-300 text-gray-700 font-semibold px-6 py-3 rounded-xl hover:bg-gray-50 transition">
+            View Demo
+          </a>
+        </div>
+
+        <div class="bg-brand-600 rounded-2xl p-8 text-white shadow-xl shadow-brand-200 relative card-hover">
+          <div class="absolute -top-3 left-1/2 -translate-x-1/2 bg-amber-400 text-gray-900 text-xs font-bold px-3 py-1 rounded-full">Most Popular</div>
+          <div class="text-sm font-semibold text-brand-200 uppercase tracking-wider">Professional</div>
+          <div class="mt-4 flex items-baseline gap-1">
+            <span class="text-4xl font-bold">$499</span>
+            <span class="text-brand-200">/mo</span>
+          </div>
+          <p class="mt-3 text-sm text-brand-200">For businesses ready to scale.</p>
+          <div class="mt-8 space-y-3">
+            <div class="flex items-center gap-3 text-sm">
+              <svg class="w-4 h-4 text-brand-200 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+              Everything in Starter
+            </div>
+            <div class="flex items-center gap-3 text-sm">
+              <svg class="w-4 h-4 text-brand-200 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+              Advanced analytics
+            </div>
+            <div class="flex items-center gap-3 text-sm">
+              <svg class="w-4 h-4 text-brand-200 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+              Automation workflows
+            </div>
+            <div class="flex items-center gap-3 text-sm">
+              <svg class="w-4 h-4 text-brand-200 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+              Custom branding
+            </div>
+            <div class="flex items-center gap-3 text-sm">
+              <svg class="w-4 h-4 text-brand-200 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+              Priority support
+            </div>
+          </div>
+          <a href="dashboard.html" class="mt-8 block text-center bg-white text-brand-600 font-semibold px-6 py-3 rounded-xl hover:bg-brand-50 transition">
+            View Demo
+          </a>
+        </div>
+
+        <div class="bg-white rounded-2xl p-8 border border-gray-200 card-hover">
+          <div class="text-sm font-semibold text-gray-500 uppercase tracking-wider">Enterprise</div>
+          <div class="mt-4 flex items-baseline gap-1">
+            <span class="text-4xl font-bold">$799</span>
+            <span class="text-gray-500">/mo</span>
+          </div>
+          <p class="mt-3 text-sm text-gray-600">For multi-location and complex operations.</p>
+          <div class="mt-8 space-y-3">
+            <div class="flex items-center gap-3 text-sm text-gray-700">
+              <svg class="w-4 h-4 text-brand-600 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+              Everything in Professional
+            </div>
+            <div class="flex items-center gap-3 text-sm text-gray-700">
+              <svg class="w-4 h-4 text-brand-600 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+              Multi-location support
+            </div>
+            <div class="flex items-center gap-3 text-sm text-gray-700">
+              <svg class="w-4 h-4 text-brand-600 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+              Custom modules
+            </div>
+            <div class="flex items-center gap-3 text-sm text-gray-700">
+              <svg class="w-4 h-4 text-brand-600 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+              API access
+            </div>
+            <div class="flex items-center gap-3 text-sm text-gray-700">
+              <svg class="w-4 h-4 text-brand-600 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+              Dedicated account manager
+            </div>
+          </div>
+          <a href="dashboard.html" class="mt-8 block text-center border border-gray-300 text-gray-700 font-semibold px-6 py-3 rounded-xl hover:bg-gray-50 transition">
+            View Demo
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="py-24 px-6">
+    <div class="max-w-4xl mx-auto text-center">
+      <h2 class="text-3xl md:text-4xl font-bold tracking-tight">Ready to see what your business looks like on Weeks Warez?</h2>
+      <p class="mt-4 text-gray-600 text-lg">We can have a working demo customized for your business in under a week.</p>
+      <div class="mt-10 flex flex-col sm:flex-row justify-center gap-4">
+        <a href="dashboard.html" class="bg-brand-600 text-white font-semibold px-8 py-3.5 rounded-xl hover:bg-brand-700 transition shadow-lg shadow-brand-200">
+          Explore the Dashboard
+        </a>
+        <a href="mailto:hello@weekswarez.com" class="border border-gray-300 text-gray-700 font-semibold px-8 py-3.5 rounded-xl hover:bg-gray-50 transition">
+          Get in Touch
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="border-t border-gray-200 py-12 px-6">
+    <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-6">
+      <div class="flex items-center gap-2">
+        <div class="w-7 h-7 bg-brand-600 rounded-lg flex items-center justify-center">
+          <span class="text-white font-bold text-xs">W</span>
+        </div>
+        <span class="font-bold text-lg">Weeks Warez</span>
+      </div>
+      <div class="flex gap-8 text-sm text-gray-500">
+        <a href="#features" class="hover:text-gray-900 transition">Features</a>
+        <a href="#industries" class="hover:text-gray-900 transition">Industries</a>
+        <a href="#pricing" class="hover:text-gray-900 transition">Pricing</a>
+        <a href="dashboard.html" class="hover:text-gray-900 transition">Dashboard</a>
+      </div>
+      <div class="text-sm text-gray-400">&copy; 2026 Weeks Warez. All rights reserved.</div>
+    </div>
+  </footer>
+
+</body>
+</html>
