@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Dashboard — Weeks Warez</title>
+  <title>Dashboard &mdash; Weeks Web</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
   <script>
@@ -11,304 +11,272 @@
       theme: {
         extend: {
           colors: {
-            brand: {
-              50: '#eef2ff', 100: '#e0e7ff', 200: '#c7d2fe', 300: '#a5b4fc',
-              400: '#818cf8', 500: '#6366f1', 600: '#4f46e5', 700: '#4338ca',
-              800: '#3730a3', 900: '#312e81', 950: '#1e1b4b',
-            }
+            term: { green: '#22c55e', dim: '#86efac', bg: '#0a0a0a', card: '#111111', border: '#1e1e1e', muted: '#666', surface: '#161616' },
+            accent: '#a78bfa',
+          },
+          fontFamily: {
+            mono: ['JetBrains Mono', 'Fira Code', 'monospace'],
+            sans: ['Inter', 'system-ui', 'sans-serif'],
           }
         }
       }
     }
   </script>
   <style>
-    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
-    body { font-family: 'Inter', sans-serif; }
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap');
+    body { font-family: 'Inter', sans-serif; background: #0a0a0a; }
+    .glow { text-shadow: 0 0 20px rgba(34, 197, 94, 0.3); }
+    .card-glow:hover { box-shadow: 0 0 30px rgba(34, 197, 94, 0.06); border-color: #22c55e20; }
+    ::selection { background: #22c55e; color: #000; }
     .sidebar-link { transition: all 0.15s ease; }
-    .sidebar-link:hover, .sidebar-link.active { background: rgba(99, 102, 241, 0.1); color: #4f46e5; }
-    .mini-chart { background: linear-gradient(to top, rgba(99,102,241,0.08), transparent); }
+    .sidebar-link:hover { background: rgba(34, 197, 94, 0.08); color: #22c55e; }
+    .sidebar-link.active { background: rgba(34, 197, 94, 0.1); color: #22c55e; border-left: 2px solid #22c55e; }
   </style>
 </head>
-<body class="bg-gray-50 antialiased" x-data="dashboard()">
+<body class="bg-term-bg text-gray-300 antialiased" x-data="dashboard()">
 
   <div class="flex h-screen overflow-hidden">
     <!-- Sidebar -->
-    <aside class="hidden lg:flex flex-col w-64 bg-white border-r border-gray-200 shrink-0">
-      <div class="h-16 flex items-center px-6 border-b border-gray-100">
-        <a href="index.html" class="flex items-center gap-2">
-          <div class="w-8 h-8 bg-brand-600 rounded-lg flex items-center justify-center">
-            <span class="text-white font-bold text-sm">W</span>
-          </div>
-          <span class="font-bold text-lg tracking-tight">Weeks Warez</span>
+    <aside class="hidden lg:flex flex-col w-60 bg-term-card border-r border-term-border shrink-0">
+      <div class="h-14 flex items-center px-5 border-b border-term-border">
+        <a href="index.html" class="flex items-center gap-2 font-mono text-sm">
+          <span class="text-term-green font-bold">~/</span>
+          <span class="text-white font-bold">weeks-web</span>
         </a>
       </div>
 
-      <nav class="flex-1 px-3 py-4 space-y-1">
-        <a href="#" @click.prevent="page='overview'" class="sidebar-link flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium"
-           :class="page === 'overview' ? 'active bg-brand-50 text-brand-600' : 'text-gray-600'">
-          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/></svg>
-          Overview
+      <nav class="flex-1 py-4 space-y-0.5">
+        <a href="#" @click.prevent="page='overview'" class="sidebar-link flex items-center gap-3 px-5 py-2.5 text-sm font-mono"
+           :class="page === 'overview' ? 'active' : 'text-term-muted'">
+          <span class="w-4 text-center opacity-60">~</span> overview
         </a>
-        <a href="#" @click.prevent="page='bookings'" class="sidebar-link flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium"
-           :class="page === 'bookings' ? 'active bg-brand-50 text-brand-600' : 'text-gray-600'">
-          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
-          Bookings
-          <span class="ml-auto bg-brand-100 text-brand-700 text-xs font-semibold px-2 py-0.5 rounded-full">12</span>
+        <a href="#" @click.prevent="page='bookings'" class="sidebar-link flex items-center gap-3 px-5 py-2.5 text-sm font-mono"
+           :class="page === 'bookings' ? 'active' : 'text-term-muted'">
+          <span class="w-4 text-center opacity-60">~</span> bookings
+          <span class="ml-auto font-mono text-xs bg-term-green/15 text-term-green px-1.5 py-0.5 rounded">12</span>
         </a>
-        <a href="#" @click.prevent="page='clients'" class="sidebar-link flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium"
-           :class="page === 'clients' ? 'active bg-brand-50 text-brand-600' : 'text-gray-600'">
-          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
-          Clients
+        <a href="#" @click.prevent="page='clients'" class="sidebar-link flex items-center gap-3 px-5 py-2.5 text-sm font-mono"
+           :class="page === 'clients' ? 'active' : 'text-term-muted'">
+          <span class="w-4 text-center opacity-60">~</span> clients
         </a>
-        <a href="#" @click.prevent="page='payments'" class="sidebar-link flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium"
-           :class="page === 'payments' ? 'active bg-brand-50 text-brand-600' : 'text-gray-600'">
-          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
-          Payments
+        <a href="#" @click.prevent="page='payments'" class="sidebar-link flex items-center gap-3 px-5 py-2.5 text-sm font-mono"
+           :class="page === 'payments' ? 'active' : 'text-term-muted'">
+          <span class="w-4 text-center opacity-60">~</span> payments
         </a>
-        <a href="#" @click.prevent="page='invoices'" class="sidebar-link flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium"
-           :class="page === 'invoices' ? 'active bg-brand-50 text-brand-600' : 'text-gray-600'">
-          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
-          Invoices
+        <a href="#" @click.prevent="page='invoices'" class="sidebar-link flex items-center gap-3 px-5 py-2.5 text-sm font-mono"
+           :class="page === 'invoices' ? 'active' : 'text-term-muted'">
+          <span class="w-4 text-center opacity-60">~</span> invoices
         </a>
-        <a href="#" class="sidebar-link flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium text-gray-600">
-          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/></svg>
-          Analytics
+        <a href="#" class="sidebar-link flex items-center gap-3 px-5 py-2.5 text-sm font-mono text-term-muted">
+          <span class="w-4 text-center opacity-60">~</span> analytics
         </a>
-        <a href="#" class="sidebar-link flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium text-gray-600">
-          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/></svg>
-          Automations
+        <a href="#" class="sidebar-link flex items-center gap-3 px-5 py-2.5 text-sm font-mono text-term-muted">
+          <span class="w-4 text-center opacity-60">~</span> automations
         </a>
-
-        <div class="pt-4 mt-4 border-t border-gray-100">
-          <a href="#" class="sidebar-link flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium text-gray-600">
-            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.066 2.573c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.573 1.066c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.066-2.573c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
-            Settings
-          </a>
-        </div>
+        <a href="#" class="sidebar-link flex items-center gap-3 px-5 py-2.5 text-sm font-mono text-term-muted">
+          <span class="w-4 text-center opacity-60">~</span> settings
+        </a>
       </nav>
 
-      <div class="p-4 border-t border-gray-100">
-        <div class="bg-brand-50 rounded-xl p-4">
-          <div class="text-sm font-semibold text-brand-900">Bella's Hair Studio</div>
-          <div class="text-xs text-brand-600 mt-0.5">Professional Plan</div>
-          <div class="mt-3 w-full bg-brand-100 rounded-full h-1.5">
-            <div class="bg-brand-600 h-1.5 rounded-full" style="width: 72%"></div>
+      <div class="p-4 border-t border-term-border">
+        <div class="bg-term-surface rounded-lg p-4 border border-term-border">
+          <div class="font-mono text-xs text-term-green mb-1">active client:</div>
+          <div class="text-sm font-bold text-white">Zany's Play World</div>
+          <div class="font-mono text-xs text-term-muted mt-1">zanysplayworld.com</div>
+          <div class="mt-3 w-full bg-term-border rounded-full h-1">
+            <div class="bg-term-green h-1 rounded-full" style="width: 72%"></div>
           </div>
-          <div class="text-xs text-brand-600 mt-1.5">72% of monthly booking capacity</div>
+          <div class="font-mono text-xs text-term-muted mt-1.5">72% monthly capacity</div>
         </div>
       </div>
     </aside>
 
-    <!-- Main content -->
+    <!-- Main -->
     <main class="flex-1 overflow-y-auto">
       <!-- Top bar -->
-      <header class="h-16 bg-white border-b border-gray-200 flex items-center justify-between px-6 sticky top-0 z-10">
-        <div class="flex items-center gap-4">
-          <div class="lg:hidden flex items-center gap-2">
-            <div class="w-8 h-8 bg-brand-600 rounded-lg flex items-center justify-center">
-              <span class="text-white font-bold text-sm">W</span>
-            </div>
+      <header class="h-14 bg-term-card border-b border-term-border flex items-center justify-between px-6 sticky top-0 z-10">
+        <div class="flex items-center gap-3">
+          <div class="lg:hidden font-mono text-sm">
+            <span class="text-term-green">~/</span><span class="text-white font-bold">weeks-web</span>
           </div>
-          <div>
-            <h1 class="text-lg font-semibold text-gray-900" x-text="pageTitle"></h1>
-          </div>
+          <h1 class="font-mono text-sm text-term-muted" x-text="'$ cd ./' + page"></h1>
         </div>
         <div class="flex items-center gap-4">
           <div class="relative">
-            <button class="relative p-2 text-gray-400 hover:text-gray-600 transition">
-              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"/></svg>
-              <span class="absolute top-1.5 right-1.5 w-2 h-2 bg-red-500 rounded-full"></span>
-            </button>
+            <div class="w-2 h-2 bg-term-green rounded-full absolute -top-0.5 -right-0.5 animate-pulse"></div>
+            <svg class="w-4 h-4 text-term-muted" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"/></svg>
           </div>
-          <div class="flex items-center gap-3">
-            <div class="w-8 h-8 bg-brand-100 rounded-full flex items-center justify-center">
-              <span class="text-brand-700 font-semibold text-sm">BH</span>
+          <div class="flex items-center gap-2">
+            <div class="w-7 h-7 bg-term-green/20 rounded-md flex items-center justify-center">
+              <span class="text-term-green font-mono text-xs font-bold">ZP</span>
             </div>
-            <div class="hidden sm:block">
-              <div class="text-sm font-medium text-gray-900">Bella Henderson</div>
-              <div class="text-xs text-gray-500">Owner</div>
+            <div class="hidden sm:block font-mono text-xs">
+              <div class="text-white">Zany's Admin</div>
+              <div class="text-term-muted">owner</div>
             </div>
           </div>
         </div>
       </header>
 
-      <!-- Page content -->
       <div class="p-6 max-w-7xl mx-auto">
 
-        <!-- Overview Page -->
+        <!-- Overview -->
         <template x-if="page === 'overview'">
           <div>
-            <!-- Period selector -->
+            <!-- Period -->
             <div class="flex items-center gap-2 mb-6">
               <template x-for="p in ['7d', '30d', '90d', '12m']">
                 <button @click="period = p"
-                        class="px-3 py-1.5 text-xs font-medium rounded-lg transition"
-                        :class="period === p ? 'bg-brand-600 text-white' : 'bg-white text-gray-600 border border-gray-200 hover:bg-gray-50'"
-                        x-text="p === '7d' ? '7 days' : p === '30d' ? '30 days' : p === '90d' ? '90 days' : '12 months'">
+                        class="px-3 py-1.5 text-xs font-mono rounded-md transition"
+                        :class="period === p ? 'bg-term-green text-black font-bold' : 'bg-term-card text-term-muted border border-term-border hover:border-term-green/30'"
+                        x-text="p">
                 </button>
               </template>
             </div>
 
-            <!-- KPI Cards -->
+            <!-- KPIs -->
             <div class="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
-              <div class="bg-white rounded-xl border border-gray-200 p-5">
-                <div class="flex items-center justify-between mb-3">
-                  <span class="text-xs font-medium text-gray-500 uppercase tracking-wider">MRR</span>
-                  <span class="text-xs font-semibold text-green-600 bg-green-50 px-2 py-0.5 rounded-full">+12.5%</span>
-                </div>
-                <div class="text-2xl font-bold text-gray-900">$18,420</div>
-                <div class="text-xs text-gray-500 mt-1">vs $16,373 last month</div>
-                <div class="mt-3 h-8 mini-chart rounded flex items-end gap-0.5 px-1">
-                  <div class="flex-1 bg-brand-400 rounded-t" style="height:40%"></div>
-                  <div class="flex-1 bg-brand-400 rounded-t" style="height:55%"></div>
-                  <div class="flex-1 bg-brand-400 rounded-t" style="height:45%"></div>
-                  <div class="flex-1 bg-brand-400 rounded-t" style="height:60%"></div>
-                  <div class="flex-1 bg-brand-400 rounded-t" style="height:70%"></div>
-                  <div class="flex-1 bg-brand-400 rounded-t" style="height:65%"></div>
-                  <div class="flex-1 bg-brand-400 rounded-t" style="height:80%"></div>
-                  <div class="flex-1 bg-brand-400 rounded-t" style="height:75%"></div>
-                  <div class="flex-1 bg-brand-400 rounded-t" style="height:85%"></div>
-                  <div class="flex-1 bg-brand-400 rounded-t" style="height:90%"></div>
-                  <div class="flex-1 bg-brand-400 rounded-t" style="height:88%"></div>
-                  <div class="flex-1 bg-brand-600 rounded-t" style="height:100%"></div>
+              <div class="bg-term-card rounded-xl border border-term-border p-5 card-glow transition-all duration-300">
+                <div class="font-mono text-xs text-term-muted mb-2">MRR</div>
+                <div class="text-2xl font-black text-white">$18,420</div>
+                <div class="font-mono text-xs text-term-green mt-1">+12.5%</div>
+                <div class="mt-3 h-8 flex items-end gap-0.5">
+                  <div class="flex-1 bg-term-green/20 rounded-t" style="height:40%"></div>
+                  <div class="flex-1 bg-term-green/20 rounded-t" style="height:55%"></div>
+                  <div class="flex-1 bg-term-green/20 rounded-t" style="height:45%"></div>
+                  <div class="flex-1 bg-term-green/20 rounded-t" style="height:60%"></div>
+                  <div class="flex-1 bg-term-green/20 rounded-t" style="height:70%"></div>
+                  <div class="flex-1 bg-term-green/25 rounded-t" style="height:65%"></div>
+                  <div class="flex-1 bg-term-green/30 rounded-t" style="height:80%"></div>
+                  <div class="flex-1 bg-term-green/30 rounded-t" style="height:75%"></div>
+                  <div class="flex-1 bg-term-green/35 rounded-t" style="height:85%"></div>
+                  <div class="flex-1 bg-term-green/40 rounded-t" style="height:90%"></div>
+                  <div class="flex-1 bg-term-green/45 rounded-t" style="height:88%"></div>
+                  <div class="flex-1 bg-term-green rounded-t" style="height:100%"></div>
                 </div>
               </div>
 
-              <div class="bg-white rounded-xl border border-gray-200 p-5">
-                <div class="flex items-center justify-between mb-3">
-                  <span class="text-xs font-medium text-gray-500 uppercase tracking-wider">Active Clients</span>
-                  <span class="text-xs font-semibold text-green-600 bg-green-50 px-2 py-0.5 rounded-full">+8</span>
-                </div>
-                <div class="text-2xl font-bold text-gray-900">284</div>
-                <div class="text-xs text-gray-500 mt-1">276 last month</div>
-                <div class="mt-3 h-8 mini-chart rounded flex items-end gap-0.5 px-1">
-                  <div class="flex-1 bg-purple-400 rounded-t" style="height:50%"></div>
-                  <div class="flex-1 bg-purple-400 rounded-t" style="height:55%"></div>
-                  <div class="flex-1 bg-purple-400 rounded-t" style="height:58%"></div>
-                  <div class="flex-1 bg-purple-400 rounded-t" style="height:62%"></div>
-                  <div class="flex-1 bg-purple-400 rounded-t" style="height:60%"></div>
-                  <div class="flex-1 bg-purple-400 rounded-t" style="height:68%"></div>
-                  <div class="flex-1 bg-purple-400 rounded-t" style="height:72%"></div>
-                  <div class="flex-1 bg-purple-400 rounded-t" style="height:75%"></div>
-                  <div class="flex-1 bg-purple-400 rounded-t" style="height:80%"></div>
-                  <div class="flex-1 bg-purple-400 rounded-t" style="height:85%"></div>
-                  <div class="flex-1 bg-purple-400 rounded-t" style="height:90%"></div>
-                  <div class="flex-1 bg-purple-600 rounded-t" style="height:95%"></div>
+              <div class="bg-term-card rounded-xl border border-term-border p-5 card-glow transition-all duration-300">
+                <div class="font-mono text-xs text-term-muted mb-2">ACTIVE CLIENTS</div>
+                <div class="text-2xl font-black text-white">284</div>
+                <div class="font-mono text-xs text-term-green mt-1">+8 this month</div>
+                <div class="mt-3 h-8 flex items-end gap-0.5">
+                  <div class="flex-1 bg-accent/20 rounded-t" style="height:50%"></div>
+                  <div class="flex-1 bg-accent/20 rounded-t" style="height:55%"></div>
+                  <div class="flex-1 bg-accent/25 rounded-t" style="height:58%"></div>
+                  <div class="flex-1 bg-accent/25 rounded-t" style="height:62%"></div>
+                  <div class="flex-1 bg-accent/25 rounded-t" style="height:68%"></div>
+                  <div class="flex-1 bg-accent/30 rounded-t" style="height:72%"></div>
+                  <div class="flex-1 bg-accent/30 rounded-t" style="height:75%"></div>
+                  <div class="flex-1 bg-accent/35 rounded-t" style="height:80%"></div>
+                  <div class="flex-1 bg-accent/35 rounded-t" style="height:85%"></div>
+                  <div class="flex-1 bg-accent/40 rounded-t" style="height:88%"></div>
+                  <div class="flex-1 bg-accent/45 rounded-t" style="height:92%"></div>
+                  <div class="flex-1 bg-accent rounded-t" style="height:95%"></div>
                 </div>
               </div>
 
-              <div class="bg-white rounded-xl border border-gray-200 p-5">
-                <div class="flex items-center justify-between mb-3">
-                  <span class="text-xs font-medium text-gray-500 uppercase tracking-wider">Bookings</span>
-                  <span class="text-xs font-semibold text-green-600 bg-green-50 px-2 py-0.5 rounded-full">+23%</span>
-                </div>
-                <div class="text-2xl font-bold text-gray-900">1,247</div>
-                <div class="text-xs text-gray-500 mt-1">this month</div>
-                <div class="mt-3 h-8 mini-chart rounded flex items-end gap-0.5 px-1">
-                  <div class="flex-1 bg-blue-400 rounded-t" style="height:35%"></div>
-                  <div class="flex-1 bg-blue-400 rounded-t" style="height:45%"></div>
-                  <div class="flex-1 bg-blue-400 rounded-t" style="height:55%"></div>
-                  <div class="flex-1 bg-blue-400 rounded-t" style="height:50%"></div>
-                  <div class="flex-1 bg-blue-400 rounded-t" style="height:65%"></div>
-                  <div class="flex-1 bg-blue-400 rounded-t" style="height:70%"></div>
-                  <div class="flex-1 bg-blue-400 rounded-t" style="height:60%"></div>
-                  <div class="flex-1 bg-blue-400 rounded-t" style="height:75%"></div>
-                  <div class="flex-1 bg-blue-400 rounded-t" style="height:85%"></div>
-                  <div class="flex-1 bg-blue-400 rounded-t" style="height:80%"></div>
-                  <div class="flex-1 bg-blue-400 rounded-t" style="height:92%"></div>
-                  <div class="flex-1 bg-blue-600 rounded-t" style="height:100%"></div>
+              <div class="bg-term-card rounded-xl border border-term-border p-5 card-glow transition-all duration-300">
+                <div class="font-mono text-xs text-term-muted mb-2">BOOKINGS</div>
+                <div class="text-2xl font-black text-white">1,247</div>
+                <div class="font-mono text-xs text-term-green mt-1">+23%</div>
+                <div class="mt-3 h-8 flex items-end gap-0.5">
+                  <div class="flex-1 bg-blue-500/20 rounded-t" style="height:35%"></div>
+                  <div class="flex-1 bg-blue-500/20 rounded-t" style="height:45%"></div>
+                  <div class="flex-1 bg-blue-500/25 rounded-t" style="height:55%"></div>
+                  <div class="flex-1 bg-blue-500/25 rounded-t" style="height:50%"></div>
+                  <div class="flex-1 bg-blue-500/30 rounded-t" style="height:65%"></div>
+                  <div class="flex-1 bg-blue-500/30 rounded-t" style="height:70%"></div>
+                  <div class="flex-1 bg-blue-500/30 rounded-t" style="height:60%"></div>
+                  <div class="flex-1 bg-blue-500/35 rounded-t" style="height:75%"></div>
+                  <div class="flex-1 bg-blue-500/40 rounded-t" style="height:85%"></div>
+                  <div class="flex-1 bg-blue-500/40 rounded-t" style="height:80%"></div>
+                  <div class="flex-1 bg-blue-500/45 rounded-t" style="height:92%"></div>
+                  <div class="flex-1 bg-blue-500 rounded-t" style="height:100%"></div>
                 </div>
               </div>
 
-              <div class="bg-white rounded-xl border border-gray-200 p-5">
-                <div class="flex items-center justify-between mb-3">
-                  <span class="text-xs font-medium text-gray-500 uppercase tracking-wider">Retention</span>
-                  <span class="text-xs font-semibold text-green-600 bg-green-50 px-2 py-0.5 rounded-full">+1.2%</span>
-                </div>
-                <div class="text-2xl font-bold text-gray-900">94.8%</div>
-                <div class="text-xs text-gray-500 mt-1">client retention rate</div>
-                <div class="mt-3 h-8 mini-chart rounded flex items-end gap-0.5 px-1">
-                  <div class="flex-1 bg-emerald-400 rounded-t" style="height:85%"></div>
-                  <div class="flex-1 bg-emerald-400 rounded-t" style="height:87%"></div>
-                  <div class="flex-1 bg-emerald-400 rounded-t" style="height:86%"></div>
-                  <div class="flex-1 bg-emerald-400 rounded-t" style="height:88%"></div>
-                  <div class="flex-1 bg-emerald-400 rounded-t" style="height:90%"></div>
-                  <div class="flex-1 bg-emerald-400 rounded-t" style="height:89%"></div>
-                  <div class="flex-1 bg-emerald-400 rounded-t" style="height:91%"></div>
-                  <div class="flex-1 bg-emerald-400 rounded-t" style="height:92%"></div>
-                  <div class="flex-1 bg-emerald-400 rounded-t" style="height:93%"></div>
-                  <div class="flex-1 bg-emerald-400 rounded-t" style="height:93%"></div>
-                  <div class="flex-1 bg-emerald-400 rounded-t" style="height:94%"></div>
-                  <div class="flex-1 bg-emerald-600 rounded-t" style="height:95%"></div>
+              <div class="bg-term-card rounded-xl border border-term-border p-5 card-glow transition-all duration-300">
+                <div class="font-mono text-xs text-term-muted mb-2">RETENTION</div>
+                <div class="text-2xl font-black text-white">94.8%</div>
+                <div class="font-mono text-xs text-term-green mt-1">+1.2%</div>
+                <div class="mt-3 h-8 flex items-end gap-0.5">
+                  <div class="flex-1 bg-emerald-500/30 rounded-t" style="height:85%"></div>
+                  <div class="flex-1 bg-emerald-500/30 rounded-t" style="height:87%"></div>
+                  <div class="flex-1 bg-emerald-500/35 rounded-t" style="height:86%"></div>
+                  <div class="flex-1 bg-emerald-500/35 rounded-t" style="height:88%"></div>
+                  <div class="flex-1 bg-emerald-500/35 rounded-t" style="height:90%"></div>
+                  <div class="flex-1 bg-emerald-500/35 rounded-t" style="height:89%"></div>
+                  <div class="flex-1 bg-emerald-500/40 rounded-t" style="height:91%"></div>
+                  <div class="flex-1 bg-emerald-500/40 rounded-t" style="height:92%"></div>
+                  <div class="flex-1 bg-emerald-500/40 rounded-t" style="height:93%"></div>
+                  <div class="flex-1 bg-emerald-500/45 rounded-t" style="height:93%"></div>
+                  <div class="flex-1 bg-emerald-500/45 rounded-t" style="height:94%"></div>
+                  <div class="flex-1 bg-emerald-500 rounded-t" style="height:95%"></div>
                 </div>
               </div>
             </div>
 
-            <!-- Second row: Revenue + Activity -->
-            <div class="grid lg:grid-cols-3 gap-6 mb-8">
-              <!-- Revenue breakdown -->
-              <div class="lg:col-span-2 bg-white rounded-xl border border-gray-200 p-6">
+            <!-- Revenue + Activity -->
+            <div class="grid lg:grid-cols-3 gap-4 mb-8">
+              <div class="lg:col-span-2 bg-term-card rounded-xl border border-term-border p-6">
                 <div class="flex items-center justify-between mb-6">
-                  <h3 class="font-semibold text-gray-900">Revenue Breakdown</h3>
-                  <span class="text-sm text-gray-500">March 2026</span>
+                  <h3 class="font-mono text-sm text-white">revenue breakdown</h3>
+                  <span class="font-mono text-xs text-term-muted">mar 2026</span>
                 </div>
                 <div class="space-y-4">
                   <div>
-                    <div class="flex justify-between text-sm mb-1.5">
-                      <span class="text-gray-600">Subscriptions</span>
-                      <span class="font-semibold text-gray-900">$12,840</span>
+                    <div class="flex justify-between font-mono text-sm mb-1.5">
+                      <span class="text-term-muted">subscriptions</span>
+                      <span class="text-white font-bold">$12,840</span>
                     </div>
-                    <div class="w-full bg-gray-100 rounded-full h-2.5">
-                      <div class="bg-brand-600 h-2.5 rounded-full" style="width: 70%"></div>
-                    </div>
-                  </div>
-                  <div>
-                    <div class="flex justify-between text-sm mb-1.5">
-                      <span class="text-gray-600">One-time services</span>
-                      <span class="font-semibold text-gray-900">$3,280</span>
-                    </div>
-                    <div class="w-full bg-gray-100 rounded-full h-2.5">
-                      <div class="bg-purple-500 h-2.5 rounded-full" style="width: 42%"></div>
+                    <div class="w-full bg-term-border rounded-full h-2">
+                      <div class="bg-term-green h-2 rounded-full" style="width: 70%"></div>
                     </div>
                   </div>
                   <div>
-                    <div class="flex justify-between text-sm mb-1.5">
-                      <span class="text-gray-600">Product sales</span>
-                      <span class="font-semibold text-gray-900">$1,580</span>
+                    <div class="flex justify-between font-mono text-sm mb-1.5">
+                      <span class="text-term-muted">one-time services</span>
+                      <span class="text-white font-bold">$3,280</span>
                     </div>
-                    <div class="w-full bg-gray-100 rounded-full h-2.5">
-                      <div class="bg-blue-500 h-2.5 rounded-full" style="width: 25%"></div>
+                    <div class="w-full bg-term-border rounded-full h-2">
+                      <div class="bg-accent h-2 rounded-full" style="width: 42%"></div>
                     </div>
                   </div>
                   <div>
-                    <div class="flex justify-between text-sm mb-1.5">
-                      <span class="text-gray-600">Late fees / add-ons</span>
-                      <span class="font-semibold text-gray-900">$720</span>
+                    <div class="flex justify-between font-mono text-sm mb-1.5">
+                      <span class="text-term-muted">gift cards</span>
+                      <span class="text-white font-bold">$1,580</span>
                     </div>
-                    <div class="w-full bg-gray-100 rounded-full h-2.5">
-                      <div class="bg-amber-500 h-2.5 rounded-full" style="width: 12%"></div>
+                    <div class="w-full bg-term-border rounded-full h-2">
+                      <div class="bg-blue-500 h-2 rounded-full" style="width: 25%"></div>
+                    </div>
+                  </div>
+                  <div>
+                    <div class="flex justify-between font-mono text-sm mb-1.5">
+                      <span class="text-term-muted">events + camps</span>
+                      <span class="text-white font-bold">$720</span>
+                    </div>
+                    <div class="w-full bg-term-border rounded-full h-2">
+                      <div class="bg-amber-500 h-2 rounded-full" style="width: 12%"></div>
                     </div>
                   </div>
                 </div>
-                <div class="mt-6 pt-4 border-t border-gray-100 flex justify-between">
-                  <span class="text-sm font-semibold text-gray-900">Total Revenue</span>
-                  <span class="text-lg font-bold text-gray-900">$18,420</span>
+                <div class="mt-6 pt-4 border-t border-term-border flex justify-between font-mono text-sm">
+                  <span class="text-white font-bold">total</span>
+                  <span class="text-term-green font-black text-lg">$18,420</span>
                 </div>
               </div>
 
-              <!-- Recent activity -->
-              <div class="bg-white rounded-xl border border-gray-200 p-6">
-                <h3 class="font-semibold text-gray-900 mb-4">Recent Activity</h3>
-                <div class="space-y-4">
+              <div class="bg-term-card rounded-xl border border-term-border p-6">
+                <h3 class="font-mono text-sm text-white mb-4">recent activity</h3>
+                <div class="space-y-3">
                   <template x-for="item in activity" :key="item.id">
                     <div class="flex gap-3">
-                      <div class="w-8 h-8 rounded-full flex items-center justify-center shrink-0 text-xs font-bold"
-                           :class="item.color">
-                        <span x-text="item.icon"></span>
-                      </div>
+                      <div class="font-mono text-xs w-6 text-center shrink-0" :class="item.color" x-text="item.icon"></div>
                       <div class="min-w-0">
-                        <p class="text-sm text-gray-900 truncate" x-text="item.text"></p>
-                        <p class="text-xs text-gray-500 mt-0.5" x-text="item.time"></p>
+                        <p class="text-sm text-gray-300 truncate" x-text="item.text"></p>
+                        <p class="font-mono text-xs text-term-muted mt-0.5" x-text="item.time"></p>
                       </div>
                     </div>
                   </template>
@@ -316,97 +284,88 @@
               </div>
             </div>
 
-            <!-- Third row: Upcoming bookings + Tasks -->
-            <div class="grid lg:grid-cols-2 gap-6 mb-8">
-              <!-- Upcoming bookings -->
-              <div class="bg-white rounded-xl border border-gray-200 p-6">
+            <!-- Bookings + Tasks -->
+            <div class="grid lg:grid-cols-2 gap-4 mb-8">
+              <div class="bg-term-card rounded-xl border border-term-border p-6">
                 <div class="flex items-center justify-between mb-4">
-                  <h3 class="font-semibold text-gray-900">Today's Bookings</h3>
-                  <span class="text-xs bg-brand-50 text-brand-600 font-semibold px-2.5 py-1 rounded-full">12 scheduled</span>
+                  <h3 class="font-mono text-sm text-white">today's bookings</h3>
+                  <span class="font-mono text-xs bg-term-green/15 text-term-green px-2 py-0.5 rounded">12</span>
                 </div>
-                <div class="space-y-3">
+                <div class="space-y-2">
                   <template x-for="b in bookings" :key="b.id">
-                    <div class="flex items-center gap-4 p-3 rounded-lg hover:bg-gray-50 transition">
-                      <div class="w-10 h-10 rounded-full flex items-center justify-center text-sm font-bold"
-                           :class="b.avatarColor">
+                    <div class="flex items-center gap-3 p-3 rounded-lg hover:bg-term-surface transition">
+                      <div class="w-8 h-8 rounded-md flex items-center justify-center font-mono text-xs font-bold" :class="b.avatarColor">
                         <span x-text="b.initials"></span>
                       </div>
                       <div class="flex-1 min-w-0">
                         <div class="flex items-center justify-between">
-                          <span class="text-sm font-medium text-gray-900 truncate" x-text="b.name"></span>
-                          <span class="text-xs text-gray-500" x-text="b.time"></span>
+                          <span class="text-sm text-white truncate" x-text="b.name"></span>
+                          <span class="font-mono text-xs text-term-muted" x-text="b.time"></span>
                         </div>
-                        <div class="text-xs text-gray-500 mt-0.5" x-text="b.service"></div>
+                        <div class="font-mono text-xs text-term-muted mt-0.5" x-text="b.service"></div>
                       </div>
-                      <span class="text-xs font-medium px-2 py-1 rounded-full shrink-0"
-                            :class="b.statusColor" x-text="b.status"></span>
+                      <span class="font-mono text-xs px-2 py-0.5 rounded" :class="b.statusColor" x-text="b.status"></span>
                     </div>
                   </template>
                 </div>
               </div>
 
-              <!-- Tasks -->
-              <div class="bg-white rounded-xl border border-gray-200 p-6">
+              <div class="bg-term-card rounded-xl border border-term-border p-6">
                 <div class="flex items-center justify-between mb-4">
-                  <h3 class="font-semibold text-gray-900">Operational Tasks</h3>
-                  <span class="text-xs bg-amber-50 text-amber-600 font-semibold px-2.5 py-1 rounded-full">4 pending</span>
+                  <h3 class="font-mono text-sm text-white">ops tasks</h3>
+                  <span class="font-mono text-xs bg-amber-500/15 text-amber-400 px-2 py-0.5 rounded">4 open</span>
                 </div>
-                <div class="space-y-3">
+                <div class="space-y-2">
                   <template x-for="t in tasks" :key="t.id">
-                    <div class="flex items-center gap-3 p-3 rounded-lg hover:bg-gray-50 transition">
-                      <div class="w-5 h-5 rounded border-2 shrink-0 flex items-center justify-center"
-                           :class="t.done ? 'border-green-500 bg-green-500' : 'border-gray-300'">
-                        <svg x-show="t.done" class="w-3 h-3 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"/></svg>
+                    <div class="flex items-center gap-3 p-3 rounded-lg hover:bg-term-surface transition">
+                      <div class="w-4 h-4 rounded border flex items-center justify-center shrink-0 font-mono"
+                           :class="t.done ? 'border-term-green bg-term-green/20 text-term-green' : 'border-term-border'">
+                        <span x-show="t.done" class="text-xs">+</span>
                       </div>
-                      <div class="flex-1 min-w-0">
-                        <span class="text-sm" :class="t.done ? 'text-gray-400 line-through' : 'text-gray-900'" x-text="t.text"></span>
-                      </div>
-                      <span class="text-xs font-medium px-2 py-1 rounded-full shrink-0"
-                            :class="t.priorityColor" x-text="t.priority"></span>
+                      <span class="text-sm flex-1" :class="t.done ? 'text-term-muted line-through' : 'text-gray-300'" x-text="t.text"></span>
+                      <span class="font-mono text-xs px-2 py-0.5 rounded" :class="t.priorityColor" x-text="t.priority"></span>
                     </div>
                   </template>
                 </div>
               </div>
             </div>
 
-            <!-- Subscriptions table -->
-            <div class="bg-white rounded-xl border border-gray-200 p-6">
+            <!-- Subscriptions -->
+            <div class="bg-term-card rounded-xl border border-term-border p-6">
               <div class="flex items-center justify-between mb-4">
-                <h3 class="font-semibold text-gray-900">Active Subscriptions</h3>
-                <button class="text-sm text-brand-600 font-medium hover:text-brand-700">View all</button>
+                <h3 class="font-mono text-sm text-white">active clients</h3>
               </div>
               <div class="overflow-x-auto">
                 <table class="w-full text-sm">
                   <thead>
-                    <tr class="text-left text-xs text-gray-500 uppercase tracking-wider border-b border-gray-100">
-                      <th class="pb-3 font-medium">Client</th>
-                      <th class="pb-3 font-medium">Plan</th>
-                      <th class="pb-3 font-medium">MRR</th>
-                      <th class="pb-3 font-medium">Status</th>
-                      <th class="pb-3 font-medium">Next Invoice</th>
+                    <tr class="text-left font-mono text-xs text-term-muted border-b border-term-border">
+                      <th class="pb-3">client</th>
+                      <th class="pb-3">type</th>
+                      <th class="pb-3">plan</th>
+                      <th class="pb-3">mrr</th>
+                      <th class="pb-3">status</th>
                     </tr>
                   </thead>
-                  <tbody class="divide-y divide-gray-50">
+                  <tbody class="divide-y divide-term-border">
                     <template x-for="s in subscriptions" :key="s.name">
-                      <tr class="hover:bg-gray-50">
+                      <tr class="hover:bg-term-surface">
                         <td class="py-3">
                           <div class="flex items-center gap-3">
-                            <div class="w-8 h-8 rounded-full flex items-center justify-center text-xs font-bold"
-                                 :class="s.avatarColor">
+                            <div class="w-7 h-7 rounded-md flex items-center justify-center font-mono text-xs font-bold" :class="s.avatarColor">
                               <span x-text="s.initials"></span>
                             </div>
                             <div>
-                              <div class="font-medium text-gray-900" x-text="s.name"></div>
-                              <div class="text-xs text-gray-500" x-text="s.type"></div>
+                              <div class="text-white font-medium" x-text="s.name"></div>
+                              <div class="font-mono text-xs text-term-muted" x-text="s.domain"></div>
                             </div>
                           </div>
                         </td>
-                        <td class="py-3 text-gray-600" x-text="s.plan"></td>
-                        <td class="py-3 font-semibold text-gray-900" x-text="s.mrr"></td>
+                        <td class="py-3 font-mono text-xs text-term-muted" x-text="s.type"></td>
+                        <td class="py-3 font-mono text-xs text-gray-400" x-text="s.plan"></td>
+                        <td class="py-3 font-mono text-sm text-white font-bold" x-text="s.mrr"></td>
                         <td class="py-3">
-                          <span class="text-xs font-medium px-2 py-1 rounded-full" :class="s.statusColor" x-text="s.status"></span>
+                          <span class="font-mono text-xs px-2 py-0.5 rounded" :class="s.statusColor" x-text="s.status"></span>
                         </td>
-                        <td class="py-3 text-gray-500" x-text="s.nextInvoice"></td>
                       </tr>
                     </template>
                   </tbody>
@@ -420,29 +379,25 @@
         <template x-if="page === 'bookings'">
           <div>
             <div class="flex items-center justify-between mb-6">
-              <div class="flex items-center gap-3">
-                <button class="bg-brand-600 text-white text-sm font-medium px-4 py-2 rounded-lg hover:bg-brand-700 transition">+ New Booking</button>
-              </div>
+              <button class="bg-term-green text-black text-sm font-bold font-mono px-4 py-2 rounded-lg hover:bg-term-dim transition">+ new booking</button>
               <div class="flex gap-2">
-                <button class="px-3 py-1.5 text-xs font-medium rounded-lg bg-white text-gray-600 border border-gray-200">Today</button>
-                <button class="px-3 py-1.5 text-xs font-medium rounded-lg bg-white text-gray-600 border border-gray-200">This Week</button>
-                <button class="px-3 py-1.5 text-xs font-medium rounded-lg bg-brand-600 text-white">This Month</button>
+                <button class="px-3 py-1.5 font-mono text-xs rounded-md bg-term-card text-term-muted border border-term-border">today</button>
+                <button class="px-3 py-1.5 font-mono text-xs rounded-md bg-term-card text-term-muted border border-term-border">this week</button>
+                <button class="px-3 py-1.5 font-mono text-xs rounded-md bg-term-green text-black font-bold">this month</button>
               </div>
             </div>
-
-            <!-- Calendar-style grid -->
-            <div class="bg-white rounded-xl border border-gray-200 overflow-hidden">
-              <div class="grid grid-cols-7 border-b border-gray-200">
+            <div class="bg-term-card rounded-xl border border-term-border overflow-hidden">
+              <div class="grid grid-cols-7 border-b border-term-border">
                 <template x-for="day in ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']">
-                  <div class="p-3 text-center text-xs font-semibold text-gray-500 uppercase tracking-wider border-r border-gray-100 last:border-r-0" x-text="day"></div>
+                  <div class="p-3 text-center font-mono text-xs text-term-muted border-r border-term-border last:border-r-0" x-text="day"></div>
                 </template>
               </div>
               <div class="grid grid-cols-7">
                 <template x-for="d in calendarDays" :key="d.day">
-                  <div class="min-h-[100px] p-2 border-r border-b border-gray-100" :class="d.today ? 'bg-brand-50' : ''">
-                    <div class="text-sm font-medium mb-1" :class="d.today ? 'text-brand-600' : d.current ? 'text-gray-900' : 'text-gray-300'" x-text="d.day"></div>
+                  <div class="min-h-[100px] p-2 border-r border-b border-term-border" :class="d.today ? 'bg-term-green/5' : ''">
+                    <div class="font-mono text-sm mb-1" :class="d.today ? 'text-term-green font-bold' : d.current ? 'text-gray-400' : 'text-term-border'" x-text="d.day"></div>
                     <template x-for="ev in d.events">
-                      <div class="text-xs px-1.5 py-0.5 rounded mb-0.5 truncate" :class="ev.color" x-text="ev.text"></div>
+                      <div class="font-mono text-xs px-1.5 py-0.5 rounded mb-0.5 truncate" :class="ev.color" x-text="ev.text"></div>
                     </template>
                   </div>
                 </template>
@@ -456,40 +411,40 @@
           <div>
             <div class="flex items-center justify-between mb-6">
               <div class="relative">
-                <svg class="w-4 h-4 text-gray-400 absolute left-3 top-1/2 -translate-y-1/2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
-                <input type="text" placeholder="Search clients..." class="pl-10 pr-4 py-2 border border-gray-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-transparent w-64">
+                <span class="font-mono text-term-muted absolute left-3 top-1/2 -translate-y-1/2 text-sm">$</span>
+                <input type="text" placeholder="grep clients..." class="pl-8 pr-4 py-2 bg-term-card border border-term-border rounded-lg font-mono text-sm text-white focus:outline-none focus:border-term-green/50 w-64 placeholder:text-term-muted">
               </div>
-              <button class="bg-brand-600 text-white text-sm font-medium px-4 py-2 rounded-lg hover:bg-brand-700 transition">+ Add Client</button>
+              <button class="bg-term-green text-black text-sm font-bold font-mono px-4 py-2 rounded-lg hover:bg-term-dim transition">+ add client</button>
             </div>
-            <div class="bg-white rounded-xl border border-gray-200 overflow-hidden">
+            <div class="bg-term-card rounded-xl border border-term-border overflow-hidden">
               <table class="w-full text-sm">
                 <thead>
-                  <tr class="text-left text-xs text-gray-500 uppercase tracking-wider border-b border-gray-100 bg-gray-50">
-                    <th class="p-4 font-medium">Client</th>
-                    <th class="p-4 font-medium">Email</th>
-                    <th class="p-4 font-medium">Total Visits</th>
-                    <th class="p-4 font-medium">Total Spent</th>
-                    <th class="p-4 font-medium">Last Visit</th>
-                    <th class="p-4 font-medium">Status</th>
+                  <tr class="text-left font-mono text-xs text-term-muted border-b border-term-border bg-term-surface">
+                    <th class="p-4">client</th>
+                    <th class="p-4">email</th>
+                    <th class="p-4">visits</th>
+                    <th class="p-4">spent</th>
+                    <th class="p-4">last visit</th>
+                    <th class="p-4">status</th>
                   </tr>
                 </thead>
-                <tbody class="divide-y divide-gray-50">
+                <tbody class="divide-y divide-term-border">
                   <template x-for="c in clients" :key="c.name">
-                    <tr class="hover:bg-gray-50 cursor-pointer">
+                    <tr class="hover:bg-term-surface cursor-pointer">
                       <td class="p-4">
                         <div class="flex items-center gap-3">
-                          <div class="w-8 h-8 rounded-full flex items-center justify-center text-xs font-bold" :class="c.color">
+                          <div class="w-7 h-7 rounded-md flex items-center justify-center font-mono text-xs font-bold" :class="c.color">
                             <span x-text="c.initials"></span>
                           </div>
-                          <span class="font-medium text-gray-900" x-text="c.name"></span>
+                          <span class="text-white font-medium" x-text="c.name"></span>
                         </div>
                       </td>
-                      <td class="p-4 text-gray-500" x-text="c.email"></td>
-                      <td class="p-4 text-gray-900 font-medium" x-text="c.visits"></td>
-                      <td class="p-4 text-gray-900 font-medium" x-text="c.spent"></td>
-                      <td class="p-4 text-gray-500" x-text="c.lastVisit"></td>
+                      <td class="p-4 font-mono text-xs text-term-muted" x-text="c.email"></td>
+                      <td class="p-4 text-white font-mono" x-text="c.visits"></td>
+                      <td class="p-4 text-white font-mono" x-text="c.spent"></td>
+                      <td class="p-4 font-mono text-xs text-term-muted" x-text="c.lastVisit"></td>
                       <td class="p-4">
-                        <span class="text-xs font-medium px-2 py-1 rounded-full" :class="c.statusColor" x-text="c.status"></span>
+                        <span class="font-mono text-xs px-2 py-0.5 rounded" :class="c.statusColor" x-text="c.status"></span>
                       </td>
                     </tr>
                   </template>
@@ -503,39 +458,39 @@
         <template x-if="page === 'payments'">
           <div>
             <div class="grid grid-cols-3 gap-4 mb-6">
-              <div class="bg-white rounded-xl border border-gray-200 p-5">
-                <div class="text-xs font-medium text-gray-500 uppercase tracking-wider">Total Collected</div>
-                <div class="text-2xl font-bold text-gray-900 mt-2">$47,820</div>
-                <div class="text-xs text-green-600 mt-1">+18% vs last month</div>
+              <div class="bg-term-card rounded-xl border border-term-border p-5">
+                <div class="font-mono text-xs text-term-muted">COLLECTED</div>
+                <div class="text-2xl font-black text-white mt-2">$47,820</div>
+                <div class="font-mono text-xs text-term-green mt-1">+18%</div>
               </div>
-              <div class="bg-white rounded-xl border border-gray-200 p-5">
-                <div class="text-xs font-medium text-gray-500 uppercase tracking-wider">Pending</div>
-                <div class="text-2xl font-bold text-amber-600 mt-2">$3,240</div>
-                <div class="text-xs text-gray-500 mt-1">6 invoices outstanding</div>
+              <div class="bg-term-card rounded-xl border border-term-border p-5">
+                <div class="font-mono text-xs text-term-muted">PENDING</div>
+                <div class="text-2xl font-black text-amber-400 mt-2">$3,240</div>
+                <div class="font-mono text-xs text-term-muted mt-1">6 invoices</div>
               </div>
-              <div class="bg-white rounded-xl border border-gray-200 p-5">
-                <div class="text-xs font-medium text-gray-500 uppercase tracking-wider">Overdue</div>
-                <div class="text-2xl font-bold text-red-600 mt-2">$890</div>
-                <div class="text-xs text-gray-500 mt-1">2 invoices overdue</div>
+              <div class="bg-term-card rounded-xl border border-term-border p-5">
+                <div class="font-mono text-xs text-term-muted">OVERDUE</div>
+                <div class="text-2xl font-black text-red-400 mt-2">$890</div>
+                <div class="font-mono text-xs text-term-muted mt-1">2 invoices</div>
               </div>
             </div>
-            <div class="bg-white rounded-xl border border-gray-200 p-6">
-              <h3 class="font-semibold text-gray-900 mb-4">Recent Transactions</h3>
-              <div class="space-y-3">
+            <div class="bg-term-card rounded-xl border border-term-border p-6">
+              <h3 class="font-mono text-sm text-white mb-4">recent transactions</h3>
+              <div class="space-y-2">
                 <template x-for="tx in transactions" :key="tx.id">
-                  <div class="flex items-center justify-between p-3 rounded-lg hover:bg-gray-50">
+                  <div class="flex items-center justify-between p-3 rounded-lg hover:bg-term-surface">
                     <div class="flex items-center gap-3">
-                      <div class="w-10 h-10 rounded-full flex items-center justify-center text-xs font-bold" :class="tx.color">
+                      <div class="w-8 h-8 rounded-md flex items-center justify-center font-mono text-xs font-bold" :class="tx.color">
                         <span x-text="tx.initials"></span>
                       </div>
                       <div>
-                        <div class="text-sm font-medium text-gray-900" x-text="tx.name"></div>
-                        <div class="text-xs text-gray-500" x-text="tx.desc"></div>
+                        <div class="text-sm text-white" x-text="tx.name"></div>
+                        <div class="font-mono text-xs text-term-muted" x-text="tx.desc"></div>
                       </div>
                     </div>
                     <div class="text-right">
-                      <div class="text-sm font-semibold text-gray-900" x-text="tx.amount"></div>
-                      <div class="text-xs" :class="tx.statusColor" x-text="tx.status"></div>
+                      <div class="font-mono text-sm text-white font-bold" x-text="tx.amount"></div>
+                      <div class="font-mono text-xs" :class="tx.statusColor" x-text="tx.status"></div>
                     </div>
                   </div>
                 </template>
@@ -548,31 +503,31 @@
         <template x-if="page === 'invoices'">
           <div>
             <div class="flex items-center justify-between mb-6">
-              <h2 class="text-lg font-semibold text-gray-900">All Invoices</h2>
-              <button class="bg-brand-600 text-white text-sm font-medium px-4 py-2 rounded-lg hover:bg-brand-700 transition">+ Create Invoice</button>
+              <h2 class="font-mono text-sm text-white">all invoices</h2>
+              <button class="bg-term-green text-black text-sm font-bold font-mono px-4 py-2 rounded-lg hover:bg-term-dim transition">+ create invoice</button>
             </div>
-            <div class="bg-white rounded-xl border border-gray-200 overflow-hidden">
+            <div class="bg-term-card rounded-xl border border-term-border overflow-hidden">
               <table class="w-full text-sm">
                 <thead>
-                  <tr class="text-left text-xs text-gray-500 uppercase tracking-wider border-b border-gray-100 bg-gray-50">
-                    <th class="p-4 font-medium">Invoice #</th>
-                    <th class="p-4 font-medium">Client</th>
-                    <th class="p-4 font-medium">Amount</th>
-                    <th class="p-4 font-medium">Date</th>
-                    <th class="p-4 font-medium">Due</th>
-                    <th class="p-4 font-medium">Status</th>
+                  <tr class="text-left font-mono text-xs text-term-muted border-b border-term-border bg-term-surface">
+                    <th class="p-4">invoice</th>
+                    <th class="p-4">client</th>
+                    <th class="p-4">amount</th>
+                    <th class="p-4">date</th>
+                    <th class="p-4">due</th>
+                    <th class="p-4">status</th>
                   </tr>
                 </thead>
-                <tbody class="divide-y divide-gray-50">
+                <tbody class="divide-y divide-term-border">
                   <template x-for="inv in invoices" :key="inv.id">
-                    <tr class="hover:bg-gray-50 cursor-pointer">
-                      <td class="p-4 font-mono text-brand-600 font-medium" x-text="inv.id"></td>
-                      <td class="p-4 text-gray-900" x-text="inv.client"></td>
-                      <td class="p-4 font-semibold text-gray-900" x-text="inv.amount"></td>
-                      <td class="p-4 text-gray-500" x-text="inv.date"></td>
-                      <td class="p-4 text-gray-500" x-text="inv.due"></td>
+                    <tr class="hover:bg-term-surface cursor-pointer">
+                      <td class="p-4 font-mono text-term-green font-bold" x-text="inv.id"></td>
+                      <td class="p-4 text-white" x-text="inv.client"></td>
+                      <td class="p-4 font-mono text-white font-bold" x-text="inv.amount"></td>
+                      <td class="p-4 font-mono text-xs text-term-muted" x-text="inv.date"></td>
+                      <td class="p-4 font-mono text-xs text-term-muted" x-text="inv.due"></td>
                       <td class="p-4">
-                        <span class="text-xs font-medium px-2 py-1 rounded-full" :class="inv.statusColor" x-text="inv.status"></span>
+                        <span class="font-mono text-xs px-2 py-0.5 rounded" :class="inv.statusColor" x-text="inv.status"></span>
                       </td>
                     </tr>
                   </template>
@@ -592,103 +547,95 @@
         page: 'overview',
         period: '30d',
 
-        get pageTitle() {
-          const titles = { overview: 'Dashboard Overview', bookings: 'Bookings', clients: 'Client Management', payments: 'Payments', invoices: 'Invoices' };
-          return titles[this.page] || 'Dashboard';
-        },
-
         activity: [
-          { id: 1, icon: '$', color: 'bg-green-100 text-green-700', text: 'Payment received — Sarah Mitchell ($120)', time: '2 min ago' },
-          { id: 2, icon: '+', color: 'bg-blue-100 text-blue-700', text: 'New booking — James Chen, Cut & Color', time: '18 min ago' },
-          { id: 3, icon: '!', color: 'bg-amber-100 text-amber-700', text: 'Reminder sent — 3 upcoming appointments', time: '1 hour ago' },
-          { id: 4, icon: '*', color: 'bg-purple-100 text-purple-700', text: 'New client registered — Emily Torres', time: '2 hours ago' },
-          { id: 5, icon: '$', color: 'bg-green-100 text-green-700', text: 'Subscription renewed — Monthly Premium', time: '3 hours ago' },
-          { id: 6, icon: '+', color: 'bg-blue-100 text-blue-700', text: 'Booking rescheduled — Mia Johnson', time: '5 hours ago' },
+          { id: 1, icon: '$', color: 'text-term-green', text: 'Payment received -- Sarah M. ($120)', time: '2m ago' },
+          { id: 2, icon: '+', color: 'text-blue-400', text: 'New booking -- James C., Birthday Party', time: '18m ago' },
+          { id: 3, icon: '!', color: 'text-amber-400', text: '3 reminder SMS sent', time: '1h ago' },
+          { id: 4, icon: '*', color: 'text-accent', text: 'New member signup -- Emily T.', time: '2h ago' },
+          { id: 5, icon: '$', color: 'text-term-green', text: 'Gift card purchased -- $50', time: '3h ago' },
+          { id: 6, icon: '~', color: 'text-blue-400', text: 'Waiver signed -- Marcus B.', time: '5h ago' },
         ],
 
         bookings: [
-          { id: 1, name: 'Sarah Mitchell', initials: 'SM', avatarColor: 'bg-pink-100 text-pink-700', time: '9:00 AM', service: 'Cut & Blowout', status: 'Confirmed', statusColor: 'bg-green-50 text-green-700' },
-          { id: 2, name: 'James Chen', initials: 'JC', avatarColor: 'bg-blue-100 text-blue-700', time: '10:30 AM', service: 'Cut & Color', status: 'Confirmed', statusColor: 'bg-green-50 text-green-700' },
-          { id: 3, name: 'Emily Torres', initials: 'ET', avatarColor: 'bg-purple-100 text-purple-700', time: '11:00 AM', service: 'Full Highlights', status: 'Pending', statusColor: 'bg-amber-50 text-amber-700' },
-          { id: 4, name: 'David Park', initials: 'DP', avatarColor: 'bg-emerald-100 text-emerald-700', time: '1:00 PM', service: 'Beard Trim', status: 'Confirmed', statusColor: 'bg-green-50 text-green-700' },
-          { id: 5, name: 'Rachel Adams', initials: 'RA', avatarColor: 'bg-orange-100 text-orange-700', time: '2:30 PM', service: 'Balayage', status: 'Confirmed', statusColor: 'bg-green-50 text-green-700' },
-          { id: 6, name: 'Marcus Brown', initials: 'MB', avatarColor: 'bg-cyan-100 text-cyan-700', time: '4:00 PM', service: 'Cut & Style', status: 'Waitlist', statusColor: 'bg-gray-100 text-gray-600' },
+          { id: 1, name: 'Sarah Mitchell', initials: 'SM', avatarColor: 'bg-pink-500/20 text-pink-400', time: '9:00', service: 'Open Play x3 kids', status: 'confirmed', statusColor: 'bg-term-green/15 text-term-green' },
+          { id: 2, name: 'James Chen', initials: 'JC', avatarColor: 'bg-blue-500/20 text-blue-400', time: '10:30', service: 'Birthday Party (10 kids)', status: 'confirmed', statusColor: 'bg-term-green/15 text-term-green' },
+          { id: 3, name: 'Emily Torres', initials: 'ET', avatarColor: 'bg-accent/20 text-accent', time: '11:00', service: 'Open Play x2 kids', status: 'pending', statusColor: 'bg-amber-500/15 text-amber-400' },
+          { id: 4, name: 'David Park', initials: 'DP', avatarColor: 'bg-emerald-500/20 text-emerald-400', time: '1:00', service: 'Member check-in', status: 'confirmed', statusColor: 'bg-term-green/15 text-term-green' },
+          { id: 5, name: 'Rachel Adams', initials: 'RA', avatarColor: 'bg-orange-500/20 text-orange-400', time: '2:30', service: 'Open Play x1 kid', status: 'confirmed', statusColor: 'bg-term-green/15 text-term-green' },
+          { id: 6, name: 'Marcus Brown', initials: 'MB', avatarColor: 'bg-cyan-500/20 text-cyan-400', time: '4:00', service: 'Birthday Party (15 kids)', status: 'waitlist', statusColor: 'bg-term-muted/20 text-term-muted' },
         ],
 
         tasks: [
-          { id: 1, text: 'Restock color products — running low on Olaplex', priority: 'High', priorityColor: 'bg-red-50 text-red-600', done: false },
-          { id: 2, text: 'Follow up with 3 clients who missed appointments', priority: 'Medium', priorityColor: 'bg-amber-50 text-amber-600', done: false },
-          { id: 3, text: 'Review and approve staff schedule for next week', priority: 'Medium', priorityColor: 'bg-amber-50 text-amber-600', done: false },
-          { id: 4, text: 'Send March newsletter to client mailing list', priority: 'Low', priorityColor: 'bg-gray-100 text-gray-600', done: false },
-          { id: 5, text: 'Update service pricing on booking page', priority: 'High', priorityColor: 'bg-red-50 text-red-600', done: true },
-          { id: 6, text: 'Reconcile February payment records', priority: 'Medium', priorityColor: 'bg-amber-50 text-amber-600', done: true },
+          { id: 1, text: 'Restock grip socks -- running low on size S', priority: 'high', priorityColor: 'bg-red-500/15 text-red-400', done: false },
+          { id: 2, text: 'Follow up: 3 missed party deposits', priority: 'med', priorityColor: 'bg-amber-500/15 text-amber-400', done: false },
+          { id: 3, text: 'Review staff schedule for spring break week', priority: 'med', priorityColor: 'bg-amber-500/15 text-amber-400', done: false },
+          { id: 4, text: 'Send summer camp promo email', priority: 'low', priorityColor: 'bg-term-muted/20 text-term-muted', done: false },
+          { id: 5, text: 'Update party pricing for weekends', priority: 'high', priorityColor: 'bg-red-500/15 text-red-400', done: true },
+          { id: 6, text: 'Reconcile February cash drawer', priority: 'med', priorityColor: 'bg-amber-500/15 text-amber-400', done: true },
         ],
 
         subscriptions: [
-          { name: 'Bella\'s Hair Studio', initials: 'BH', avatarColor: 'bg-pink-100 text-pink-700', type: 'Salon', plan: 'Professional', mrr: '$499', status: 'Active', statusColor: 'bg-green-50 text-green-700', nextInvoice: 'Apr 1' },
-          { name: 'KidZone Play', initials: 'KZ', avatarColor: 'bg-blue-100 text-blue-700', type: 'Play Center', plan: 'Professional', mrr: '$499', status: 'Active', statusColor: 'bg-green-50 text-green-700', nextInvoice: 'Apr 1' },
-          { name: 'Precision Plumbing', initials: 'PP', avatarColor: 'bg-emerald-100 text-emerald-700', type: 'Service Business', plan: 'Enterprise', mrr: '$799', status: 'Active', statusColor: 'bg-green-50 text-green-700', nextInvoice: 'Apr 5' },
-          { name: 'Studio Fit', initials: 'SF', avatarColor: 'bg-purple-100 text-purple-700', type: 'Fitness Studio', plan: 'Starter', mrr: '$299', status: 'Active', statusColor: 'bg-green-50 text-green-700', nextInvoice: 'Apr 1' },
-          { name: 'Paws & Claws', initials: 'PC', avatarColor: 'bg-amber-100 text-amber-700', type: 'Pet Grooming', plan: 'Professional', mrr: '$499', status: 'Trial', statusColor: 'bg-blue-50 text-blue-700', nextInvoice: 'Apr 15' },
-          { name: 'The Tutoring Lab', initials: 'TL', avatarColor: 'bg-cyan-100 text-cyan-700', type: 'Education', plan: 'Starter', mrr: '$299', status: 'Active', statusColor: 'bg-green-50 text-green-700', nextInvoice: 'Apr 1' },
+          { name: "Zany's Play World", initials: 'ZP', avatarColor: 'bg-term-green/20 text-term-green', domain: 'zanysplayworld.com', type: 'play center', plan: 'professional', mrr: '$499', status: 'live', statusColor: 'bg-term-green/15 text-term-green' },
+          { name: 'Zany Cuts', initials: 'ZC', avatarColor: 'bg-accent/20 text-accent', domain: 'book.zanycuts.com', type: 'salon', plan: 'professional', mrr: '$499', status: 'building', statusColor: 'bg-amber-500/15 text-amber-400' },
+          { name: 'Precision Plumbing', initials: 'PP', avatarColor: 'bg-emerald-500/20 text-emerald-400', domain: '--', type: 'service', plan: 'enterprise', mrr: '$799', status: 'prospect', statusColor: 'bg-blue-500/15 text-blue-400' },
+          { name: 'Studio Fit', initials: 'SF', avatarColor: 'bg-pink-500/20 text-pink-400', domain: '--', type: 'gym', plan: 'starter', mrr: '$299', status: 'prospect', statusColor: 'bg-blue-500/15 text-blue-400' },
+          { name: 'Paws & Claws', initials: 'PC', avatarColor: 'bg-amber-500/20 text-amber-400', domain: '--', type: 'pet grooming', plan: 'professional', mrr: '$499', status: 'prospect', statusColor: 'bg-blue-500/15 text-blue-400' },
+          { name: 'The Tutoring Lab', initials: 'TL', avatarColor: 'bg-cyan-500/20 text-cyan-400', domain: '--', type: 'education', plan: 'starter', mrr: '$299', status: 'prospect', statusColor: 'bg-blue-500/15 text-blue-400' },
         ],
 
         calendarDays: (() => {
           const days = [];
-          // Pad with previous month days (March 2026 starts on Sunday, so pad 6 days)
           for (let i = 23; i <= 28; i++) days.push({ day: i, current: false, today: false, events: [] });
           for (let i = 1; i <= 31; i++) {
             const events = [];
-            if (i === 3) events.push({ text: '9am Sarah M.', color: 'bg-brand-100 text-brand-700' });
-            if (i === 3) events.push({ text: '11am Color appt', color: 'bg-purple-100 text-purple-700' });
-            if (i === 5) events.push({ text: '10am James C.', color: 'bg-blue-100 text-blue-700' });
-            if (i === 7) events.push({ text: '2pm Team mtg', color: 'bg-amber-100 text-amber-700' });
-            if (i === 10) events.push({ text: '9am Full day', color: 'bg-green-100 text-green-700' });
-            if (i === 12) events.push({ text: '3pm Emily T.', color: 'bg-pink-100 text-pink-700' });
-            if (i === 14) events.push({ text: '10am David P.', color: 'bg-emerald-100 text-emerald-700' });
-            if (i === 15) events.push({ text: '1pm Rachel A.', color: 'bg-orange-100 text-orange-700' });
-            if (i === 18) events.push({ text: '11am Highlight', color: 'bg-purple-100 text-purple-700' });
-            if (i === 20) events.push({ text: '9am Cut & Color', color: 'bg-brand-100 text-brand-700' });
-            if (i === 20) events.push({ text: '2pm Balayage', color: 'bg-pink-100 text-pink-700' });
-            if (i === 22) events.push({ text: '10am Walk-in', color: 'bg-gray-100 text-gray-600' });
-            if (i === 25) events.push({ text: '9am Full day', color: 'bg-green-100 text-green-700' });
-            if (i === 28) events.push({ text: '3pm Consult', color: 'bg-cyan-100 text-cyan-700' });
+            if (i === 3) events.push({ text: '9am Open Play x8', color: 'bg-term-green/15 text-term-green' });
+            if (i === 5) events.push({ text: '10am Birthday', color: 'bg-accent/15 text-accent' });
+            if (i === 7) events.push({ text: '2pm Staff mtg', color: 'bg-amber-500/15 text-amber-400' });
+            if (i === 10) events.push({ text: 'FULL DAY', color: 'bg-term-green/15 text-term-green' });
+            if (i === 12) events.push({ text: '3pm Party', color: 'bg-pink-500/15 text-pink-400' });
+            if (i === 14) events.push({ text: '10am Open Play', color: 'bg-term-green/15 text-term-green' });
+            if (i === 15) events.push({ text: '1pm Birthday', color: 'bg-accent/15 text-accent' });
+            if (i === 18) events.push({ text: 'Spring Break Camp', color: 'bg-blue-500/15 text-blue-400' });
+            if (i === 19) events.push({ text: 'Spring Break Camp', color: 'bg-blue-500/15 text-blue-400' });
+            if (i === 20) events.push({ text: '9am Open Play', color: 'bg-term-green/15 text-term-green' }, { text: '2pm Party', color: 'bg-accent/15 text-accent' });
+            if (i === 22) events.push({ text: 'Glow Party', color: 'bg-pink-500/15 text-pink-400' });
+            if (i === 25) events.push({ text: 'FULL DAY', color: 'bg-term-green/15 text-term-green' });
+            if (i === 28) events.push({ text: 'Easter Event', color: 'bg-amber-500/15 text-amber-400' });
             days.push({ day: i, current: true, today: i === 20, events });
           }
-          // Pad to fill grid (7 cols)
           for (let i = 1; days.length < 42; i++) days.push({ day: i, current: false, today: false, events: [] });
           return days;
         })(),
 
         clients: [
-          { name: 'Sarah Mitchell', initials: 'SM', color: 'bg-pink-100 text-pink-700', email: 'sarah.m@email.com', visits: 24, spent: '$2,880', lastVisit: 'Mar 18', status: 'Active', statusColor: 'bg-green-50 text-green-700' },
-          { name: 'James Chen', initials: 'JC', color: 'bg-blue-100 text-blue-700', email: 'jchen@email.com', visits: 18, spent: '$1,620', lastVisit: 'Mar 15', status: 'Active', statusColor: 'bg-green-50 text-green-700' },
-          { name: 'Emily Torres', initials: 'ET', color: 'bg-purple-100 text-purple-700', email: 'emily.t@email.com', visits: 12, spent: '$2,160', lastVisit: 'Mar 12', status: 'Active', statusColor: 'bg-green-50 text-green-700' },
-          { name: 'David Park', initials: 'DP', color: 'bg-emerald-100 text-emerald-700', email: 'dpark@email.com', visits: 31, spent: '$2,480', lastVisit: 'Mar 10', status: 'VIP', statusColor: 'bg-purple-50 text-purple-700' },
-          { name: 'Rachel Adams', initials: 'RA', color: 'bg-orange-100 text-orange-700', email: 'rachel.a@email.com', visits: 8, spent: '$1,440', lastVisit: 'Mar 8', status: 'Active', statusColor: 'bg-green-50 text-green-700' },
-          { name: 'Marcus Brown', initials: 'MB', color: 'bg-cyan-100 text-cyan-700', email: 'm.brown@email.com', visits: 5, spent: '$400', lastVisit: 'Feb 28', status: 'New', statusColor: 'bg-blue-50 text-blue-700' },
-          { name: 'Lisa Nguyen', initials: 'LN', color: 'bg-rose-100 text-rose-700', email: 'l.nguyen@email.com', visits: 42, spent: '$5,040', lastVisit: 'Mar 19', status: 'VIP', statusColor: 'bg-purple-50 text-purple-700' },
-          { name: 'Tom Wilson', initials: 'TW', color: 'bg-teal-100 text-teal-700', email: 'twilson@email.com', visits: 2, spent: '$160', lastVisit: 'Jan 15', status: 'Inactive', statusColor: 'bg-gray-100 text-gray-600' },
+          { name: 'Sarah Mitchell', initials: 'SM', color: 'bg-pink-500/20 text-pink-400', email: 'sarah.m@email.com', visits: 24, spent: '$2,880', lastVisit: 'Mar 18', status: 'active', statusColor: 'bg-term-green/15 text-term-green' },
+          { name: 'James Chen', initials: 'JC', color: 'bg-blue-500/20 text-blue-400', email: 'jchen@email.com', visits: 18, spent: '$1,620', lastVisit: 'Mar 15', status: 'active', statusColor: 'bg-term-green/15 text-term-green' },
+          { name: 'Emily Torres', initials: 'ET', color: 'bg-accent/20 text-accent', email: 'emily.t@email.com', visits: 12, spent: '$2,160', lastVisit: 'Mar 12', status: 'member', statusColor: 'bg-accent/15 text-accent' },
+          { name: 'David Park', initials: 'DP', color: 'bg-emerald-500/20 text-emerald-400', email: 'dpark@email.com', visits: 31, spent: '$2,480', lastVisit: 'Mar 10', status: 'member', statusColor: 'bg-accent/15 text-accent' },
+          { name: 'Rachel Adams', initials: 'RA', color: 'bg-orange-500/20 text-orange-400', email: 'rachel.a@email.com', visits: 8, spent: '$1,440', lastVisit: 'Mar 8', status: 'active', statusColor: 'bg-term-green/15 text-term-green' },
+          { name: 'Marcus Brown', initials: 'MB', color: 'bg-cyan-500/20 text-cyan-400', email: 'm.brown@email.com', visits: 5, spent: '$400', lastVisit: 'Feb 28', status: 'new', statusColor: 'bg-blue-500/15 text-blue-400' },
+          { name: 'Lisa Nguyen', initials: 'LN', color: 'bg-rose-500/20 text-rose-400', email: 'l.nguyen@email.com', visits: 42, spent: '$5,040', lastVisit: 'Mar 19', status: 'member', statusColor: 'bg-accent/15 text-accent' },
+          { name: 'Tom Wilson', initials: 'TW', color: 'bg-teal-500/20 text-teal-400', email: 'twilson@email.com', visits: 2, spent: '$160', lastVisit: 'Jan 15', status: 'inactive', statusColor: 'bg-term-muted/20 text-term-muted' },
         ],
 
         transactions: [
-          { id: 1, name: 'Sarah Mitchell', initials: 'SM', color: 'bg-pink-100 text-pink-700', desc: 'Cut & Blowout', amount: '$120', status: 'Completed', statusColor: 'text-green-600' },
-          { id: 2, name: 'James Chen', initials: 'JC', color: 'bg-blue-100 text-blue-700', desc: 'Cut & Color', amount: '$185', status: 'Completed', statusColor: 'text-green-600' },
-          { id: 3, name: 'Emily Torres', initials: 'ET', color: 'bg-purple-100 text-purple-700', desc: 'Full Highlights', amount: '$240', status: 'Pending', statusColor: 'text-amber-600' },
-          { id: 4, name: 'David Park', initials: 'DP', color: 'bg-emerald-100 text-emerald-700', desc: 'Beard Trim', amount: '$45', status: 'Completed', statusColor: 'text-green-600' },
-          { id: 5, name: 'Rachel Adams', initials: 'RA', color: 'bg-orange-100 text-orange-700', desc: 'Balayage', amount: '$280', status: 'Completed', statusColor: 'text-green-600' },
-          { id: 6, name: 'Marcus Brown', initials: 'MB', color: 'bg-cyan-100 text-cyan-700', desc: 'Monthly Membership', amount: '$89', status: 'Processing', statusColor: 'text-blue-600' },
+          { id: 1, name: 'Sarah Mitchell', initials: 'SM', color: 'bg-pink-500/20 text-pink-400', desc: 'Open Play x3', amount: '$36', status: 'completed', statusColor: 'text-term-green' },
+          { id: 2, name: 'James Chen', initials: 'JC', color: 'bg-blue-500/20 text-blue-400', desc: 'Birthday Party (wknd)', amount: '$250', status: 'completed', statusColor: 'text-term-green' },
+          { id: 3, name: 'Emily Torres', initials: 'ET', color: 'bg-accent/20 text-accent', desc: 'Membership renewal', amount: '$49', status: 'completed', statusColor: 'text-term-green' },
+          { id: 4, name: 'Gift Card Purchase', initials: 'GC', color: 'bg-amber-500/20 text-amber-400', desc: 'Digital gift card', amount: '$50', status: 'completed', statusColor: 'text-term-green' },
+          { id: 5, name: 'Rachel Adams', initials: 'RA', color: 'bg-orange-500/20 text-orange-400', desc: 'Open Play x1 + socks', amount: '$15', status: 'terminal', statusColor: 'text-blue-400' },
+          { id: 6, name: 'Marcus Brown', initials: 'MB', color: 'bg-cyan-500/20 text-cyan-400', desc: 'Spring Break Camp', amount: '$89', status: 'pending', statusColor: 'text-amber-400' },
         ],
 
         invoices: [
-          { id: 'INV-2026-0089', client: 'Sarah Mitchell', amount: '$120.00', date: 'Mar 20', due: 'Mar 20', status: 'Paid', statusColor: 'bg-green-50 text-green-700' },
-          { id: 'INV-2026-0088', client: 'Emily Torres', amount: '$240.00', date: 'Mar 19', due: 'Mar 26', status: 'Pending', statusColor: 'bg-amber-50 text-amber-700' },
-          { id: 'INV-2026-0087', client: 'James Chen', amount: '$185.00', date: 'Mar 18', due: 'Mar 18', status: 'Paid', statusColor: 'bg-green-50 text-green-700' },
-          { id: 'INV-2026-0086', client: 'Rachel Adams', amount: '$280.00', date: 'Mar 17', due: 'Mar 24', status: 'Pending', statusColor: 'bg-amber-50 text-amber-700' },
-          { id: 'INV-2026-0085', client: 'David Park', amount: '$45.00', date: 'Mar 16', due: 'Mar 16', status: 'Paid', statusColor: 'bg-green-50 text-green-700' },
-          { id: 'INV-2026-0084', client: 'Marcus Brown', amount: '$89.00', date: 'Mar 15', due: 'Mar 22', status: 'Overdue', statusColor: 'bg-red-50 text-red-700' },
-          { id: 'INV-2026-0083', client: 'Lisa Nguyen', amount: '$320.00', date: 'Mar 14', due: 'Mar 14', status: 'Paid', statusColor: 'bg-green-50 text-green-700' },
-          { id: 'INV-2026-0082', client: 'Tom Wilson', amount: '$160.00', date: 'Mar 10', due: 'Mar 17', status: 'Overdue', statusColor: 'bg-red-50 text-red-700' },
+          { id: 'INV-0089', client: 'Sarah Mitchell', amount: '$36.00', date: 'Mar 20', due: 'Mar 20', status: 'paid', statusColor: 'bg-term-green/15 text-term-green' },
+          { id: 'INV-0088', client: 'James Chen', amount: '$250.00', date: 'Mar 19', due: 'Mar 19', status: 'paid', statusColor: 'bg-term-green/15 text-term-green' },
+          { id: 'INV-0087', client: 'Emily Torres', amount: '$49.00', date: 'Mar 18', due: 'Mar 18', status: 'paid', statusColor: 'bg-term-green/15 text-term-green' },
+          { id: 'INV-0086', client: 'Rachel Adams', amount: '$15.00', date: 'Mar 17', due: 'Mar 24', status: 'pending', statusColor: 'bg-amber-500/15 text-amber-400' },
+          { id: 'INV-0085', client: 'David Park', amount: '$49.00', date: 'Mar 16', due: 'Mar 16', status: 'paid', statusColor: 'bg-term-green/15 text-term-green' },
+          { id: 'INV-0084', client: 'Marcus Brown', amount: '$89.00', date: 'Mar 15', due: 'Mar 22', status: 'overdue', statusColor: 'bg-red-500/15 text-red-400' },
+          { id: 'INV-0083', client: 'Lisa Nguyen', amount: '$49.00', date: 'Mar 14', due: 'Mar 14', status: 'paid', statusColor: 'bg-term-green/15 text-term-green' },
+          { id: 'INV-0082', client: 'Tom Wilson', amount: '$32.00', date: 'Mar 10', due: 'Mar 17', status: 'overdue', statusColor: 'bg-red-500/15 text-red-400' },
         ],
       }
     }
