@@ -3,7 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Weeks Web — Software for Play Centers & Salons</title>
+  <title>Partybook — Software for Play Centers & Salons</title>
+  <link rel="icon" type="image/svg+xml" href="logo.svg">
   <script src="https://cdn.tailwindcss.com"></script>
   <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
   <script>
@@ -39,11 +40,21 @@
   <nav class="fixed top-0 w-full bg-white/90 dark:bg-[#0a0a0a]/90 backdrop-blur-md border-b border-neutral-200 dark:border-neutral-800 z-50">
     <div class="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
       <a href="index.html" class="flex items-center gap-3">
-        <div class="w-9 h-9 bg-purple-600 rounded-xl flex items-center justify-center">
-          <span class="text-white font-black text-lg">W</span>
-        </div>
+        <svg class="w-9 h-9" viewBox="0 0 36 36" xmlns="http://www.w3.org/2000/svg" aria-label="Partybook">
+          <defs>
+            <linearGradient id="pb-grad-nav" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stop-color="#a855f7"/>
+              <stop offset="100%" stop-color="#ec4899"/>
+            </linearGradient>
+          </defs>
+          <rect width="36" height="36" rx="9" fill="url(#pb-grad-nav)"/>
+          <path d="M8 12 L17 13.5 L17 26 L8 24.5 Z M28 12 L19 13.5 L19 26 L28 24.5 Z" fill="#ffffff" fill-opacity="0.96"/>
+          <circle cx="29" cy="8" r="1.6" fill="#fde047"/>
+          <circle cx="7" cy="9" r="1.2" fill="#22d3ee"/>
+          <circle cx="30" cy="29" r="1.2" fill="#34d399"/>
+        </svg>
         <div>
-          <span class="font-bold text-gray-900 dark:text-white text-lg">Weeks Web</span>
+          <span class="font-bold text-gray-900 dark:text-white text-lg">Partybook</span>
           <span class="hidden sm:inline text-neutral-400 dark:text-neutral-600 text-sm ml-2">Play Centers & Salons</span>
         </div>
       </a>
@@ -283,7 +294,7 @@
             </div>
           </div>
           <div>
-            <div class="text-sm font-semibold text-purple-600 dark:text-purple-400 uppercase tracking-wider mb-3">Weeks Web</div>
+            <div class="text-sm font-semibold text-purple-600 dark:text-purple-400 uppercase tracking-wider mb-3">Partybook</div>
             <div class="space-y-2 text-sm text-gray-700 dark:text-gray-300">
               <div class="font-semibold">Flat rate. Unlimited providers.</div>
               <div>Custom-built for your salon specifically</div>
@@ -583,10 +594,20 @@
   <footer class="border-t border-neutral-200 dark:border-neutral-800 py-8 px-6">
     <div class="max-w-6xl mx-auto flex flex-col md:flex-row justify-between items-center gap-4">
       <div class="flex items-center gap-2">
-        <div class="w-7 h-7 bg-purple-600 rounded-lg flex items-center justify-center">
-          <span class="text-white font-bold text-xs">W</span>
-        </div>
-        <span class="font-bold text-gray-900 dark:text-white">Weeks Web</span>
+        <svg class="w-7 h-7" viewBox="0 0 36 36" xmlns="http://www.w3.org/2000/svg" aria-label="Partybook">
+          <defs>
+            <linearGradient id="pb-grad-footer" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stop-color="#a855f7"/>
+              <stop offset="100%" stop-color="#ec4899"/>
+            </linearGradient>
+          </defs>
+          <rect width="36" height="36" rx="9" fill="url(#pb-grad-footer)"/>
+          <path d="M8 12 L17 13.5 L17 26 L8 24.5 Z M28 12 L19 13.5 L19 26 L28 24.5 Z" fill="#ffffff" fill-opacity="0.96"/>
+          <circle cx="29" cy="8" r="1.6" fill="#fde047"/>
+          <circle cx="7" cy="9" r="1.2" fill="#22d3ee"/>
+          <circle cx="30" cy="29" r="1.2" fill="#34d399"/>
+        </svg>
+        <span class="font-bold text-gray-900 dark:text-white">Partybook</span>
         <span class="text-neutral-400 dark:text-neutral-600 text-sm ml-1">Newnan, GA</span>
       </div>
       <div class="flex gap-6 text-sm text-neutral-500">
@@ -596,7 +617,7 @@
         <a href="https://zanysplayworld.com" target="_blank" class="hover:text-gray-900 dark:hover:text-white transition">Zany's Play World</a>
         <a href="dashboard.html" class="hover:text-gray-900 dark:hover:text-white transition">Dashboard</a>
       </div>
-      <div class="text-sm text-neutral-400">&copy; 2026 Weeks Web</div>
+      <div class="text-sm text-neutral-400">&copy; 2026 Partybook</div>
     </div>
   </footer>
 
